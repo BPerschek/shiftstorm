@@ -1,0 +1,1284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>ShiftStorm – Foundation2</title>
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#1a3a5c">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="ShiftStorm">
+  <style>
+    :root {
+      --navy:       #1a3a5c;
+      --navy-mid:   #2563a8;
+      --teal:       #00b4a6;
+      --teal-dk:    #008f84;
+      --bg:         #eef2f7;
+      --surface:    #ffffff;
+      --surface2:   #f7f9fc;
+      --border:     #dde3ea;
+      --text:       #1a2333;
+      --muted:      #6b7a8f;
+      --green:      #16a34a;
+      --amber:      #d97706;
+      --red:        #dc2626;
+      --r:          10px;
+      --sh:         0 2px 8px rgba(0,0,0,.08);
+      --sh-lg:      0 8px 28px rgba(0,0,0,.13);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 16px; scroll-behavior: smooth; -webkit-tap-highlight-color: transparent; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      background: var(--bg); color: var(--text); min-height: 100vh; line-height: 1.5;
+    }
+
+    /* ── Header ── */
+    .app-header {
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%);
+      color: #fff; padding: .9rem 1.1rem;
+      position: sticky; top: 0; z-index: 100;
+      box-shadow: 0 2px 14px rgba(0,0,0,.25);
+    }
+    .header-inner { max-width: 800px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: .75rem; }
+    .logo { display: flex; align-items: center; gap: .6rem; }
+    .logo-icon { width: 38px; height: 38px; background: var(--teal); border-radius: 9px; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; flex-shrink: 0; }
+    .logo-name { font-size: 1.25rem; font-weight: 800; letter-spacing: -.02em; }
+    .logo-org  { font-size: .68rem; opacity: .75; letter-spacing: .06em; text-transform: uppercase; }
+    .hdr-btns  { display: flex; gap: .4rem; flex-shrink: 0; }
+    .hdr-btn {
+      background: rgba(255,255,255,.15); border: 1px solid rgba(255,255,255,.22);
+      color: #fff; border-radius: 8px; padding: .38rem .75rem;
+      cursor: pointer; font-size: .78rem; transition: background .18s;
+      display: flex; align-items: center; gap: .35rem; white-space: nowrap;
+    }
+    .hdr-btn:hover { background: rgba(255,255,255,.28); }
+
+    /* ── Layout ── */
+    .main { max-width: 800px; margin: 0 auto; padding: .9rem .9rem 2rem; }
+
+    /* ── Locked Banner ── */
+    .locked-banner {
+      background: linear-gradient(135deg, var(--green), #15803d);
+      color: #fff; border-radius: var(--r); padding: .75rem 1.1rem;
+      margin-bottom: .9rem; display: none; align-items: center; gap: .7rem; font-weight: 600; font-size: .88rem;
+    }
+    .locked-banner.show { display: flex; }
+    .unlock-mini {
+      margin-left: auto; background: rgba(255,255,255,.25); border: none;
+      border-radius: 6px; color: #fff; cursor: pointer; padding: .2rem .65rem; font-size: .78rem;
+    }
+
+    /* ── Staff Card ── */
+    .staff-card {
+      background: var(--surface); border: 1px solid var(--border); border-radius: var(--r);
+      padding: 1.1rem; margin-bottom: .9rem; box-shadow: var(--sh);
+    }
+    .staff-card h3 { font-size: .7rem; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin-bottom: .7rem; }
+    .staff-fields { display: grid; grid-template-columns: 1fr 1fr; gap: .65rem; }
+    .fld { display: flex; flex-direction: column; gap: .25rem; }
+    .fld label { font-size: .78rem; font-weight: 600; color: var(--muted); }
+    .fld input, .fld select {
+      border: 1.5px solid var(--border); border-radius: 8px; padding: .55rem .7rem;
+      font-size: .93rem; color: var(--text); background: var(--surface); width: 100%;
+      transition: border-color .18s;
+    }
+    .fld input:focus, .fld select:focus { outline: none; border-color: var(--teal); }
+
+    /* ── Shift Tabs ── */
+    .shift-tabs { display: grid; grid-template-columns: repeat(3,1fr); gap: .5rem; margin-bottom: .9rem; }
+    .shift-tab {
+      background: var(--surface); border: 2px solid var(--border); border-radius: var(--r);
+      padding: .7rem .4rem; cursor: pointer; text-align: center; transition: all .18s; color: var(--muted);
+      user-select: none;
+    }
+    .shift-tab:hover:not(.active) { border-color: var(--navy-mid); color: var(--navy); }
+    .shift-tab.active { border-color: var(--teal); background: var(--teal); color: #fff; }
+    .st-label { font-size: .84rem; font-weight: 700; }
+    .st-due   { font-size: .68rem; opacity: .82; margin-top: .05rem; }
+
+    /* ── Shift Panels ── */
+    .shift-panel { display: none; }
+    .shift-panel.active { display: block; }
+
+    /* ── Section Card ── */
+    .sec-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r); margin-bottom: .85rem; box-shadow: var(--sh); overflow: hidden; }
+    .sec-hdr {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: .85rem 1.1rem; background: var(--surface2); border-bottom: 1px solid var(--border);
+      cursor: pointer; user-select: none; gap: .5rem;
+    }
+    .sec-hdr.no-toggle { cursor: default; }
+    .sec-title { font-size: .92rem; font-weight: 700; color: var(--navy); display: flex; align-items: center; gap: .55rem; }
+    .sec-icon {
+      width: 28px; height: 28px; background: var(--teal); border-radius: 6px;
+      display: flex; align-items: center; justify-content: center; font-size: .82rem; color: #fff; flex-shrink: 0;
+    }
+    .sec-prog {
+      font-size: .72rem; color: var(--muted); background: var(--bg);
+      border-radius: 20px; padding: .18rem .58rem; white-space: nowrap; flex-shrink: 0;
+    }
+    .sec-prog.done { background: rgba(22,163,74,.12); color: var(--green); }
+    .sec-body { padding: .6rem .9rem; }
+    .sec-body.collapsed { display: none; }
+
+    /* ── Task Item ── */
+    .task-item {
+      display: flex; align-items: flex-start; gap: .7rem;
+      padding: .6rem .2rem; border-bottom: 1px solid var(--border);
+    }
+    .task-item:last-child { border-bottom: none; }
+    .task-item.hidden { display: none !important; }
+
+    .cb {
+      width: 23px; height: 23px; min-width: 23px; border-radius: 6px;
+      border: 2px solid var(--border); background: var(--surface);
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      transition: all .14s; margin-top: 1px;
+    }
+    .cb.on { background: var(--teal); border-color: var(--teal); }
+    .cb.on::after { content: '✓'; color: #fff; font-size: .8rem; font-weight: 700; }
+
+    .task-lbl { flex: 1; font-size: .88rem; color: var(--text); cursor: pointer; line-height: 1.4; }
+    .task-lbl.done { text-decoration: line-through; color: var(--muted); }
+    .wed-pill {
+      font-size: .62rem; background: var(--amber); color: #fff;
+      border-radius: 4px; padding: .08rem .38rem; font-weight: 700; white-space: nowrap; margin-top: 2px;
+    }
+
+    /* ── Follow-Up Table ── */
+    .fu-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .fu-table { width: 100%; border-collapse: collapse; font-size: .82rem; min-width: 420px; }
+    .fu-table th {
+      background: var(--bg); color: var(--muted); font-size: .68rem; text-transform: uppercase;
+      letter-spacing: .05em; padding: .45rem .38rem; text-align: left; border-bottom: 2px solid var(--border);
+    }
+    .fu-table td { padding: .35rem .38rem; border-bottom: 1px solid var(--border); vertical-align: middle; }
+    .fu-table tr:last-child td { border-bottom: none; }
+    .fu-input {
+      width: 100%; border: 1px solid var(--border); border-radius: 6px;
+      padding: .3rem .48rem; font-size: .8rem; color: var(--text); background: var(--surface);
+    }
+    .fu-input:focus { outline: none; border-color: var(--teal); }
+    .att-cell { display: flex; gap: .35rem; justify-content: center; }
+    .att-btn {
+      width: 26px; height: 26px; border-radius: 50%; border: 2px solid var(--border);
+      background: var(--surface); cursor: pointer; font-size: .7rem; font-weight: 700;
+      display: flex; align-items: center; justify-content: center; transition: all .14s; color: var(--muted);
+    }
+    .att-btn.on { background: var(--green); border-color: var(--green); color: #fff; }
+    .add-fu-btn {
+      margin-top: .7rem; font-size: .8rem; border: none; border-radius: 7px;
+      cursor: pointer; padding: .38rem .8rem; background: var(--teal); color: #fff; transition: opacity .15s;
+    }
+    .add-fu-btn:hover { opacity: .88; }
+    .del-fu-btn {
+      background: var(--bg); color: var(--red); border: none;
+      border-radius: 50%; width: 26px; height: 26px; cursor: pointer;
+      font-size: .85rem; display: flex; align-items: center; justify-content: center;
+    }
+
+    /* ── Restocking notes ── */
+    .restock-notes { margin-top: .75rem; }
+    .restock-notes label { font-size: .76rem; font-weight: 600; color: var(--muted); display: block; margin-bottom: .35rem; }
+    .restock-notes textarea {
+      width: 100%; border: 1.5px solid var(--border); border-radius: 8px;
+      padding: .58rem .7rem; font-size: .84rem; min-height: 72px; resize: vertical;
+      color: var(--text); font-family: inherit;
+    }
+    .restock-notes textarea:focus { outline: none; border-color: var(--teal); }
+
+    /* ── Additional Tasks ── */
+    .add-task-row { display: flex; align-items: center; gap: .7rem; padding: .6rem .2rem; border-bottom: 1px solid var(--border); }
+    .add-task-row:last-child { border-bottom: none; }
+    .add-task-inp {
+      flex: 1; border: 1.5px solid var(--border); border-radius: 8px;
+      padding: .48rem .7rem; font-size: .88rem; color: var(--text); background: var(--surface);
+    }
+    .add-task-inp:focus { outline: none; border-color: var(--teal); }
+
+    /* ── Shift Notes ── */
+    .notes-area { padding: .7rem .9rem; }
+    .notes-area textarea {
+      width: 100%; border: 1.5px solid var(--border); border-radius: 8px;
+      padding: .7rem; font-size: .88rem; min-height: 110px; resize: vertical;
+      color: var(--text); font-family: inherit;
+    }
+    .notes-area textarea:focus { outline: none; border-color: var(--teal); }
+
+    /* ── Submit ── */
+    .submit-row { padding: 1rem 0 2.5rem; text-align: center; }
+    .submit-btn {
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%);
+      color: #fff; border: none; border-radius: 12px; padding: .95rem 2.5rem;
+      font-size: .98rem; font-weight: 700; cursor: pointer;
+      box-shadow: 0 4px 18px rgba(26,58,92,.32); transition: all .18s; letter-spacing: .02em;
+    }
+    .submit-btn:hover { transform: translateY(-1px); box-shadow: 0 6px 22px rgba(26,58,92,.42); }
+    .submit-btn:active { transform: translateY(0); }
+    .submit-btn:disabled { opacity: .5; cursor: not-allowed; transform: none; box-shadow: none; }
+    .reset-link {
+      display: block; margin-top: .75rem; font-size: .82rem; color: var(--muted);
+      cursor: pointer; background: none; border: none; text-decoration: underline;
+    }
+    .reset-link:hover { color: var(--text); }
+
+    /* ── Summary Modal ── */
+    .overlay {
+      display: none; position: fixed; inset: 0; background: rgba(0,0,0,.48); z-index: 200;
+      align-items: flex-end; justify-content: center;
+    }
+    .overlay.open { display: flex; }
+    .modal {
+      background: var(--surface); border-radius: 20px 20px 0 0;
+      width: 100%; max-width: 800px; max-height: 88vh; overflow-y: auto;
+      padding: 1.4rem; animation: slideUp .28s ease;
+    }
+    @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
+    .modal-hdr { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.1rem; padding-bottom: .9rem; border-bottom: 1px solid var(--border); }
+    .modal-title { font-size: 1.05rem; font-weight: 700; color: var(--navy); }
+    .modal-close { background: var(--bg); border: none; border-radius: 50%; width: 32px; height: 32px; cursor: pointer; font-size: 1rem; display: flex; align-items: center; justify-content: center; }
+    .sum-meta { display: grid; grid-template-columns: repeat(3,1fr); gap: .65rem; margin-bottom: 1.1rem; }
+    .sum-meta-item { background: var(--bg); border-radius: 8px; padding: .68rem; text-align: center; }
+    .sum-meta-lbl { font-size: .66rem; color: var(--muted); text-transform: uppercase; letter-spacing: .05em; }
+    .sum-meta-val { font-size: .98rem; font-weight: 700; color: var(--navy); margin-top: .15rem; }
+    .sum-sec { margin-bottom: .9rem; }
+    .sum-sec h4 { font-size: .72rem; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); margin-bottom: .45rem; }
+    .sum-list { list-style: none; }
+    .sum-list li { display: flex; align-items: center; gap: .45rem; font-size: .86rem; padding: .25rem 0; }
+    .chk-ok  { color: var(--green); }
+    .chk-no  { color: var(--red); }
+    .sum-notes { background: var(--bg); border-radius: 8px; padding: .7rem; font-size: .86rem; color: var(--text); white-space: pre-wrap; }
+
+    /* ── Admin Login ── */
+    .login-overlay {
+      display: none; position: fixed; inset: 0; background: rgba(26,58,92,.92);
+      z-index: 300; align-items: center; justify-content: center;
+    }
+    .login-overlay.open { display: flex; }
+    .login-card {
+      background: var(--surface); border-radius: 16px; padding: 1.8rem;
+      width: 100%; max-width: 360px; margin: 1rem; box-shadow: var(--sh-lg);
+    }
+    .login-title    { font-size: 1.05rem; font-weight: 700; color: var(--navy); margin-bottom: .25rem; }
+    .login-subtitle { font-size: .83rem; color: var(--muted); margin-bottom: 1.1rem; }
+    .login-inp {
+      width: 100%; border: 1.5px solid var(--border); border-radius: 8px;
+      padding: .65rem .85rem; font-size: .93rem; margin-bottom: .65rem; color: var(--text);
+    }
+    .login-inp:focus { outline: none; border-color: var(--teal); }
+    .login-err { font-size: .8rem; color: var(--red); margin-bottom: .45rem; display: none; }
+    .login-btn { width: 100%; background: var(--navy); color: #fff; border: none; border-radius: 8px; padding: .72rem; font-size: .93rem; font-weight: 700; cursor: pointer; }
+    .login-cancel { display: block; text-align: center; margin-top: .65rem; font-size: .82rem; color: var(--muted); cursor: pointer; }
+    .login-cancel:hover { color: var(--text); }
+
+    /* ── Admin Panel ── */
+    .admin-overlay {
+      display: none; position: fixed; inset: 0; background: rgba(0,0,0,.55);
+      z-index: 400; overflow-y: auto; align-items: flex-start; justify-content: center;
+    }
+    .admin-overlay.open { display: flex; }
+    .admin-panel {
+      background: var(--surface); border-radius: var(--r);
+      width: 100%; max-width: 700px; margin: 1rem; box-shadow: var(--sh-lg);
+    }
+    .admin-hdr {
+      background: var(--navy); color: #fff; padding: 1.1rem 1.25rem;
+      border-radius: var(--r) var(--r) 0 0;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .admin-hdr-title { font-size: .98rem; font-weight: 700; }
+    .admin-close {
+      background: rgba(255,255,255,.18); border: none; border-radius: 50%;
+      width: 30px; height: 30px; color: #fff; cursor: pointer; font-size: 1rem;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .admin-body { padding: 1.1rem; }
+    .admin-shift-tabs { display: flex; gap: .45rem; margin-bottom: 1rem; flex-wrap: wrap; }
+    .admin-tab {
+      padding: .38rem .85rem; border-radius: 20px; border: 1.5px solid var(--border);
+      background: var(--surface); cursor: pointer; font-size: .8rem; font-weight: 600;
+      color: var(--muted); transition: all .14s;
+    }
+    .admin-tab.active { background: var(--teal); border-color: var(--teal); color: #fff; }
+    .admin-sec-group { margin-bottom: 1.2rem; }
+    .admin-sec-group h4 {
+      font-size: .75rem; font-weight: 700; text-transform: uppercase; letter-spacing: .06em;
+      color: var(--navy); padding: .35rem 0; border-bottom: 1px solid var(--border); margin-bottom: .55rem;
+    }
+    .admin-row { display: flex; align-items: center; gap: .45rem; padding: .38rem 0; border-bottom: 1px dashed var(--border); }
+    .admin-row:last-child { border-bottom: none; }
+    .admin-row-text { flex: 1; font-size: .83rem; color: var(--text); }
+    .admin-edit-inp { flex: 1; border: 1.5px solid var(--teal); border-radius: 6px; padding: .28rem .55rem; font-size: .83rem; }
+    .admin-edit-inp:focus { outline: none; }
+    .ab { padding: .22rem .55rem; border-radius: 6px; border: none; cursor: pointer; font-size: .72rem; font-weight: 600; transition: opacity .14s; }
+    .ab:hover { opacity: .82; }
+    .ab-edit   { background: var(--bg); color: var(--navy); }
+    .ab-save   { background: var(--teal); color: #fff; }
+    .ab-del    { background: var(--bg); color: var(--red); }
+    .ab-cancel { background: var(--bg); color: var(--muted); }
+    .wed-toggle { font-size: .68rem; color: var(--amber); background: rgba(217,119,6,.1); border: 1px solid var(--amber); border-radius: 4px; padding: .08rem .38rem; cursor: pointer; font-weight: 700; white-space: nowrap; }
+    .admin-add-row { display: flex; gap: .45rem; margin-top: .7rem; }
+    .admin-add-inp {
+      flex: 1; border: 1.5px solid var(--border); border-radius: 8px;
+      padding: .48rem .7rem; font-size: .83rem; color: var(--text);
+    }
+    .admin-add-inp:focus { outline: none; border-color: var(--teal); }
+    .admin-add-btn { background: var(--teal); color: #fff; border: none; border-radius: 8px; padding: .48rem .9rem; cursor: pointer; font-size: .83rem; font-weight: 600; }
+
+    /* ── Toast ── */
+    .toast {
+      position: fixed; bottom: 1.4rem; left: 50%;
+      transform: translateX(-50%) translateY(80px);
+      background: var(--navy); color: #fff; border-radius: 28px;
+      padding: .65rem 1.4rem; font-size: .88rem; font-weight: 600;
+      z-index: 999; transition: transform .28s; pointer-events: none; white-space: nowrap;
+    }
+    .toast.show { transform: translateX(-50%) translateY(0); }
+
+    /* ── Locked state ── */
+    .locked .cb, .locked .att-btn, .locked .add-fu-btn,
+    .locked .add-task-inp, .locked .notes-area textarea,
+    .locked .fu-input, .locked .restock-notes textarea { pointer-events: none; opacity: .68; }
+
+    /* ── Responsive ── */
+    @media (max-width: 480px) {
+      .staff-fields { grid-template-columns: 1fr; }
+      .sum-meta { grid-template-columns: 1fr 1fr; }
+      .fu-table { font-size: .76rem; }
+      .fu-table th, .fu-table td { padding: .28rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══ HEADER ═══ -->
+<header class="app-header">
+  <div class="header-inner">
+    <div class="logo">
+      <div class="logo-icon">⚡</div>
+      <div>
+        <div class="logo-name">ShiftStorm</div>
+        <div class="logo-org">Foundation2</div>
+      </div>
+    </div>
+    <div class="hdr-btns">
+      <button class="hdr-btn" onclick="openAdmin()">⚙ Admin</button>
+      <button class="hdr-btn" onclick="showSummary()">📋 View</button>
+    </div>
+  </div>
+</header>
+
+<!-- ═══ MAIN ═══ -->
+<main class="main" id="mainContent">
+
+  <!-- Locked Banner -->
+  <div class="locked-banner" id="lockedBanner">
+    🔒 Shift submitted and locked.
+    <button class="unlock-mini" onclick="resetForm()">Reset</button>
+  </div>
+
+  <!-- Staff Info -->
+  <div class="staff-card">
+    <h3>Shift Information</h3>
+    <div class="staff-fields">
+      <div class="fld">
+        <label>Staff Initials</label>
+        <input type="text" id="staffInitials" placeholder="e.g. JD" maxlength="6" autocomplete="off" spellcheck="false">
+      </div>
+      <div class="fld">
+        <label>Date</label>
+        <input type="date" id="shiftDate">
+      </div>
+    </div>
+  </div>
+
+  <!-- Shift Tabs -->
+  <div class="shift-tabs">
+    <div class="shift-tab active" id="tab-1st" onclick="selectShift('1st')">
+      <div class="st-label">1st Shift</div>
+      <div class="st-due">Due 3:00 PM</div>
+    </div>
+    <div class="shift-tab" id="tab-2nd" onclick="selectShift('2nd')">
+      <div class="st-label">2nd Shift</div>
+      <div class="st-due">Due 11:00 PM</div>
+    </div>
+    <div class="shift-tab" id="tab-3rd" onclick="selectShift('3rd')">
+      <div class="st-label">3rd Shift</div>
+      <div class="st-due">Due 7:00 AM</div>
+    </div>
+  </div>
+
+  <!-- ──────────────── 1ST SHIFT ──────────────── -->
+  <div class="shift-panel active" id="panel-1st">
+
+    <div class="sec-card">
+      <div class="sec-hdr" onclick="toggleSec(this)">
+        <div class="sec-title"><div class="sec-icon">🌅</div>Start of Shift</div>
+        <span class="sec-prog" id="prog-1st-start">0/0</span>
+      </div>
+      <div class="sec-body" id="tasks-1st-start"></div>
+    </div>
+
+    <div class="sec-card">
+      <div class="sec-hdr" onclick="toggleSec(this)">
+        <div class="sec-title"><div class="sec-icon">👥</div>Client Follow-Ups</div>
+        <span class="sec-prog" id="prog-1st-followups">0 clients</span>
+      </div>
+      <div class="sec-body">
+        <div class="fu-wrap">
+          <table class="fu-table">
+            <thead>
+              <tr>
+                <th style="min-width:64px">Client</th>
+                <th style="min-width:60px">Staff</th>
+                <th>Notes</th>
+                <th style="text-align:center;min-width:44px">Att 1</th>
+                <th style="text-align:center;min-width:44px">Att 2</th>
+                <th style="width:28px"></th>
+              </tr>
+            </thead>
+            <tbody id="fu-tbody"></tbody>
+          </table>
+        </div>
+        <button class="add-fu-btn" onclick="addFuRow()">+ Add Client</button>
+      </div>
+    </div>
+
+    <div class="sec-card">
+      <div class="sec-hdr" onclick="toggleSec(this)">
+        <div class="sec-title"><div class="sec-icon">🧹</div>Clean & Reset</div>
+        <span class="sec-prog" id="prog-1st-clean">0/0</span>
+      </div>
+      <div class="sec-body" id="tasks-1st-clean"></div>
+    </div>
+
+    <div class="sec-card">
+      <div class="sec-hdr" onclick="toggleSec(this)">
+        <div class="sec-title"><div class="sec-icon">📝</div>Additional Tasks</div>
+      </div>
+      <div class="sec-body" id="add-1st">
+        <div class="add-task-row">
+          <div class="cb" onclick="toggleAdd(this)" data-shift="1st" data-idx="0"></div>
+          <input type="text" class="add-task-inp" placeholder="Task description…" id="add-1st-0" oninput="saveAdd('1st',0,this.value)">
+        </div>
+        <div class="add-task-row">
+          <div class="cb" onclick="toggleAdd(this)" data-shift="1st" data-idx="1"></div>
+          <input type="text" class="add-task-inp" placeholder="Task description…" id="add-1st-1" oninput="saveAdd('1st',1,this.value)">
+        </div>
+      </div>
+    </div>
+
+    <div class="sec-card">
+      <div class="sec-hdr no-toggle">
+        <div class="sec-title"><div class="sec-icon">📢</div>Shift Notes for Leadership</div>
+      </div>
+      <div class="notes-area"><textarea id="notes-1st" placeholder="Notes for leadership…" oninput="state.notes['1st']=this.value;save()"></textarea></div>
+    </div>
+
+  </div><!-- /1st -->
+
+  <!-- ──────────────── 2ND SHIFT ──────────────── -->
+  <div class="shift-panel" id="panel-2nd">
+
+    <div class="sec-card">
+      <div class="sec-hdr" onclick="toggleSec(this)">
+        <div class="sec-title"><div class="sec-icon">🌆</div>Start of Shift</div>
+        <span class="sec-prog" id="prog-2nd-start">0/0</span>
+      </div>
+      <div class="sec-body" id="tasks-2nd-start"></div>
+    </div>
+
+    <div class="sec-card">
+      <div class="sec-hdr" onclick="toggleSec(this)">
+        <div class="sec-title"><div class="sec-icon">🧹</div>Clean & Reset</div>
+        <span class="sec-prog" id="prog-2nd-clean">0/0</span>
+      </div>
+      <div class="sec-body" id="tasks-2nd-clean"></div>
+    </div>
+
+    <div class="sec-card">
+      <div class="sec-hdr" onclick="toggleSec(this)">
+        <div class="sec-title"><div class="sec-icon">📦</div>Restocking</div>
+        <span class="sec-prog" id="prog-2nd-restock">0/0</span>
+      </div>
+      <div class="sec-body" id="tasks-2nd-restock">
+        <!-- Tasks injected here, notes below -->
+        <div class="restock-notes" id="restock-notes-wrap">
+          <label>Items Needed (anything to order or restock):</label>
+          <textarea id="restock-items" placeholder="e.g. Kleenex, fidget spinners…" oninput="state.restockItems=this.value;save()"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <div class="sec-card">
+      <div class="sec-hdr" onclick="toggleSec(this)">
+        <div class="sec-title"><div class="sec-icon">📝</div>Additional Tasks</div>
+      </div>
+      <div class="sec-body" id="add-2nd">
+        <div class="add-task-row">
+          <div class="cb" onclick="toggleAdd(this)" data-shift="2nd" data-idx="0"></div>
+          <input type="text" class="add-task-inp" placeholder="Task description…" id="add-2nd-0" oninput="saveAdd('2nd',0,this.value)">
+        </div>
+        <div class="add-task-row">
+          <div class="cb" onclick="toggleAdd(this)" data-shift="2nd" data-idx="1"></div>
+          <input type="text" class="add-task-inp" placeholder="Task description…" id="add-2nd-1" oninput="saveAdd('2nd',1,this.value)">
+        </div>
+      </div>
+    </div>
+
+    <div class="sec-card">
+      <div class="sec-hdr no-toggle">
+        <div class="sec-title"><div class="sec-icon">📢</div>Shift Notes for Leadership</div>
+      </div>
+      <div class="notes-area"><textarea id="notes-2nd" placeholder="Notes for leadership…" oninput="state.notes['2nd']=this.value;save()"></textarea></div>
+    </div>
+
+  </div><!-- /2nd -->
+
+  <!-- ──────────────── 3RD SHIFT ──────────────── -->
+  <div class="shift-panel" id="panel-3rd">
+
+    <div class="sec-card">
+      <div class="sec-hdr" onclick="toggleSec(this)">
+        <div class="sec-title"><div class="sec-icon">🌙</div>Start of Shift</div>
+        <span class="sec-prog" id="prog-3rd-start">0/0</span>
+      </div>
+      <div class="sec-body" id="tasks-3rd-start"></div>
+    </div>
+
+    <div class="sec-card">
+      <div class="sec-hdr" onclick="toggleSec(this)">
+        <div class="sec-title"><div class="sec-icon">🧽</div>Cleaning & Sanitizing</div>
+        <span class="sec-prog" id="prog-3rd-clean">0/0</span>
+      </div>
+      <div class="sec-body" id="tasks-3rd-clean"></div>
+    </div>
+
+    <div class="sec-card">
+      <div class="sec-hdr" onclick="toggleSec(this)">
+        <div class="sec-title"><div class="sec-icon">🗂️</div>Organization & Reset</div>
+        <span class="sec-prog" id="prog-3rd-org">0/0</span>
+      </div>
+      <div class="sec-body" id="tasks-3rd-org"></div>
+    </div>
+
+    <div class="sec-card">
+      <div class="sec-hdr" onclick="toggleSec(this)">
+        <div class="sec-title"><div class="sec-icon">🔐</div>Lockbox & Resources</div>
+        <span class="sec-prog" id="prog-3rd-lockbox">0/0</span>
+      </div>
+      <div class="sec-body" id="tasks-3rd-lockbox"></div>
+    </div>
+
+    <div class="sec-card">
+      <div class="sec-hdr" onclick="toggleSec(this)">
+        <div class="sec-title"><div class="sec-icon">💻</div>Technology</div>
+        <span class="sec-prog" id="prog-3rd-tech">0/0</span>
+      </div>
+      <div class="sec-body" id="tasks-3rd-tech"></div>
+    </div>
+
+    <div class="sec-card">
+      <div class="sec-hdr" onclick="toggleSec(this)">
+        <div class="sec-title"><div class="sec-icon">🚪</div>End of Shift</div>
+        <span class="sec-prog" id="prog-3rd-end">0/0</span>
+      </div>
+      <div class="sec-body" id="tasks-3rd-end"></div>
+    </div>
+
+    <div class="sec-card">
+      <div class="sec-hdr" onclick="toggleSec(this)">
+        <div class="sec-title"><div class="sec-icon">📝</div>Additional Tasks</div>
+      </div>
+      <div class="sec-body" id="add-3rd">
+        <div class="add-task-row">
+          <div class="cb" onclick="toggleAdd(this)" data-shift="3rd" data-idx="0"></div>
+          <input type="text" class="add-task-inp" placeholder="Task description…" id="add-3rd-0" oninput="saveAdd('3rd',0,this.value)">
+        </div>
+        <div class="add-task-row">
+          <div class="cb" onclick="toggleAdd(this)" data-shift="3rd" data-idx="1"></div>
+          <input type="text" class="add-task-inp" placeholder="Task description…" id="add-3rd-1" oninput="saveAdd('3rd',1,this.value)">
+        </div>
+      </div>
+    </div>
+
+    <div class="sec-card">
+      <div class="sec-hdr no-toggle">
+        <div class="sec-title"><div class="sec-icon">📢</div>Shift Notes for Leadership</div>
+      </div>
+      <div class="notes-area"><textarea id="notes-3rd" placeholder="Notes for leadership…" oninput="state.notes['3rd']=this.value;save()"></textarea></div>
+    </div>
+
+  </div><!-- /3rd -->
+
+  <!-- Submit -->
+  <div class="submit-row">
+    <button class="submit-btn" id="submitBtn" onclick="submitShift()">✓ Submit &amp; Lock Shift</button>
+    <button class="reset-link" onclick="resetForm()">Reset / Start New Shift</button>
+  </div>
+
+</main><!-- /main -->
+
+<!-- ═══ SUMMARY MODAL ═══ -->
+<div class="overlay" id="summaryOverlay">
+  <div class="modal">
+    <div class="modal-hdr">
+      <div class="modal-title">📋 Shift Summary</div>
+      <button class="modal-close" onclick="closeSummary()">✕</button>
+    </div>
+    <div id="summaryContent"></div>
+  </div>
+</div>
+
+<!-- ═══ ADMIN LOGIN ═══ -->
+<div class="login-overlay" id="loginOverlay">
+  <div class="login-card">
+    <div class="login-title">🔐 Admin Access</div>
+    <div class="login-subtitle">Enter the admin password to manage tasks.</div>
+    <input type="password" class="login-inp" id="adminPw" placeholder="Password"
+           onkeydown="if(event.key==='Enter')doLogin()">
+    <div class="login-err" id="loginErr">Incorrect password. Try again.</div>
+    <button class="login-btn" onclick="doLogin()">Sign In</button>
+    <span class="login-cancel" onclick="closeLogin()">Cancel</span>
+  </div>
+</div>
+
+<!-- ═══ ADMIN PANEL ═══ -->
+<div class="admin-overlay" id="adminOverlay">
+  <div class="admin-panel">
+    <div class="admin-hdr">
+      <div class="admin-hdr-title">⚙ Admin — Task Manager</div>
+      <button class="admin-close" onclick="closeAdmin()">✕</button>
+    </div>
+    <div class="admin-body">
+      <div class="admin-shift-tabs">
+        <button class="admin-tab active" onclick="selAdminShift('1st',this)">1st Shift</button>
+        <button class="admin-tab" onclick="selAdminShift('2nd',this)">2nd Shift</button>
+        <button class="admin-tab" onclick="selAdminShift('3rd',this)">3rd Shift</button>
+      </div>
+      <div id="adminContent"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ TOAST ═══ -->
+<div class="toast" id="toast"></div>
+
+<script>
+// ══════════════════════════════════════════
+//  DEFAULT TASK DEFINITIONS
+// ══════════════════════════════════════════
+const DEFAULTS = {
+  '1st': {
+    start: [
+      { id: 'lights',  text: 'Turn on triage lights',   wednesday: false },
+      { id: 'binder',  text: 'Binder check',             wednesday: false },
+      { id: 'vocera',  text: 'Login to Vocera',          wednesday: false },
+      { id: 'email',   text: 'Check emails',             wednesday: false },
+    ],
+    clean: [
+      { id: 'tri-san', text: 'Sanitize triage rooms',   wednesday: false },
+      { id: 'fish-wipe',text:'Wipe fishbowl counters',  wednesday: false },
+    ],
+  },
+  '2nd': {
+    start: [
+      { id: 'vocera',    text: 'Login to Vocera',        wednesday: false },
+      { id: 'carelogic', text: 'Check Carelogic alerts', wednesday: false },
+      { id: 'email',     text: 'Check emails',           wednesday: false },
+    ],
+    clean: [
+      { id: 'tri-san',   text: 'Sanitize triage rooms',              wednesday: false },
+      { id: 'vacuum',    text: 'Vacuum lobby, fishbowl & hallway',   wednesday: false },
+      { id: 'swiffer',   text: 'Swiffer for salt',                   wednesday: false },
+      { id: 'fish-wipe', text: 'Wipe fishbowl counters',             wednesday: false },
+    ],
+    restock: [
+      { id: 'tissues', text: 'Restock triage tissues',              wednesday: false },
+      { id: 'fidget',  text: 'Restock triage fidget toys',          wednesday: false },
+      { id: 'reswall', text: 'Check resource wall & copies',        wednesday: false },
+      { id: 'vending', text: 'Restock vending machine',             wednesday: false },
+    ],
+  },
+  '3rd': {
+    start: [
+      { id: 'vocera',    text: 'Login to Vocera',        wednesday: false },
+      { id: 'email',     text: 'Check emails',           wednesday: false },
+      { id: 'carelogic', text: 'Check Carelogic alerts', wednesday: false },
+    ],
+    clean: [
+      { id: 'fish-wipe', text: 'Wipe fishbowl counters',                    wednesday: false },
+      { id: 'tri-furn',  text: 'Wipe triage furniture — Lysol + Pledge',    wednesday: false },
+      { id: 'wait-furn', text: 'Wipe waiting room furniture',               wednesday: false },
+      { id: 'switches',  text: 'Wipe light switches & door handles',        wednesday: false },
+      { id: 'coffee',    text: 'Wipe coffee machine & fill water',          wednesday: false },
+      { id: 'closet',    text: 'Wipe closet shelves',                       wednesday: false },
+    ],
+    org: [
+      { id: 'lockers',  text: 'Reset lockers — note if not empty',  wednesday: false },
+      { id: 'sweep',    text: 'Sweep/vacuum triage rooms',           wednesday: false },
+      { id: 'storage',  text: 'Clean storage room',                  wednesday: false },
+    ],
+    lockbox: [
+      { id: 'fill',    text: 'Fill lockbox & update inventory sheet',       wednesday: false },
+      { id: 'bus',     text: 'Check bus tickets — note if under 5',        wednesday: false },
+      { id: 'hacap',   text: 'Check HACAP boxes — note if 2 or less',     wednesday: false },
+    ],
+    tech: [
+      { id: 'charge',   text: 'Charge all laptops, iPads & phones', wednesday: false },
+      { id: 'updates',  text: 'Check laptops for updates',           wednesday: true  },
+    ],
+    end: [
+      { id: 'trash',    text: 'Empty trash & bring to dumpster',       wednesday: false },
+      { id: 'vacuum',   text: 'Vacuum lobby, fishbowl & hallway',      wednesday: false },
+      { id: 'swiffer',  text: 'Swiffer for salt',                      wednesday: false },
+      { id: 'vocout',   text: 'Logout of Vocera',                      wednesday: false },
+    ],
+  },
+};
+
+// Section metadata per shift
+const SECS = {
+  '1st': [
+    { key: 'start', label: 'Start of Shift',   domId: 'tasks-1st-start', progId: 'prog-1st-start' },
+    { key: 'clean', label: 'Clean & Reset',    domId: 'tasks-1st-clean', progId: 'prog-1st-clean' },
+  ],
+  '2nd': [
+    { key: 'start',   label: 'Start of Shift', domId: 'tasks-2nd-start',   progId: 'prog-2nd-start' },
+    { key: 'clean',   label: 'Clean & Reset',  domId: 'tasks-2nd-clean',   progId: 'prog-2nd-clean' },
+    { key: 'restock', label: 'Restocking',     domId: 'tasks-2nd-restock', progId: 'prog-2nd-restock' },
+  ],
+  '3rd': [
+    { key: 'start',   label: 'Start of Shift',         domId: 'tasks-3rd-start',   progId: 'prog-3rd-start' },
+    { key: 'clean',   label: 'Cleaning & Sanitizing',  domId: 'tasks-3rd-clean',   progId: 'prog-3rd-clean' },
+    { key: 'org',     label: 'Organization & Reset',   domId: 'tasks-3rd-org',     progId: 'prog-3rd-org' },
+    { key: 'lockbox', label: 'Lockbox & Resources',    domId: 'tasks-3rd-lockbox', progId: 'prog-3rd-lockbox' },
+    { key: 'tech',    label: 'Technology',             domId: 'tasks-3rd-tech',    progId: 'prog-3rd-tech' },
+    { key: 'end',     label: 'End of Shift',           domId: 'tasks-3rd-end',     progId: 'prog-3rd-end' },
+  ],
+};
+
+// ══════════════════════════════════════════
+//  STATE
+// ══════════════════════════════════════════
+const DEFAULT_STATE = () => ({
+  staffInitials: '',
+  shiftDate: '',
+  activeShift: '1st',
+  checks: {},
+  followUps: [],
+  additionals: {
+    '1st': [{ text:'', checked:false }, { text:'', checked:false }],
+    '2nd': [{ text:'', checked:false }, { text:'', checked:false }],
+    '3rd': [{ text:'', checked:false }, { text:'', checked:false }],
+  },
+  notes: { '1st':'', '2nd':'', '3rd':'' },
+  restockItems: '',
+  submitted: false,
+  customTasks: {},
+});
+
+let state = DEFAULT_STATE();
+let isWed = false;
+let curAdminShift = '1st';
+
+// ══════════════════════════════════════════
+//  HELPERS
+// ══════════════════════════════════════════
+function tasks(shift, sec) {
+  const k = `${shift}-${sec}`;
+  const c = state.customTasks[k];
+  return (c && c.length > 0) ? c : (DEFAULTS[shift]?.[sec] || []).map(t => ({...t}));
+}
+
+function taskKey(shift, sec, id) { return `${shift}-${sec}-${id}`; }
+
+// ══════════════════════════════════════════
+//  RENDER SECTIONS
+// ══════════════════════════════════════════
+function renderAll() {
+  Object.keys(SECS).forEach(shift => {
+    SECS[shift].forEach(sec => {
+      if (sec.key === 'restock' && shift === '2nd') renderRestock();
+      else renderSec(shift, sec.key, sec.domId, sec.progId);
+    });
+  });
+}
+
+function renderSec(shift, sec, domId, progId) {
+  const el = document.getElementById(domId);
+  if (!el) return;
+  el.innerHTML = '';
+  tasks(shift, sec).forEach(t => {
+    const k = taskKey(shift, sec, t.id);
+    const hide = t.wednesday && !isWed;
+    const chk = !!state.checks[k];
+    const div = document.createElement('div');
+    div.className = 'task-item' + (hide ? ' hidden' : '');
+    div.dataset.k = k;
+    div.innerHTML = `
+      <div class="cb${chk?' on':''}" onclick="toggle('${k}',this)"></div>
+      <span class="task-lbl${chk?' done':''}" onclick="toggle('${k}',this.previousElementSibling)">
+        ${escHtml(t.text)}${t.wednesday ? ' <span class="wed-pill">WED</span>' : ''}
+      </span>`;
+    el.appendChild(div);
+  });
+  updateProg(shift, sec, progId);
+}
+
+function renderRestock() {
+  const el = document.getElementById('tasks-2nd-restock');
+  if (!el) return;
+  const notesWrap = document.getElementById('restock-notes-wrap');
+  Array.from(el.children).forEach(c => { if (c !== notesWrap) c.remove(); });
+  tasks('2nd','restock').forEach(t => {
+    const k = taskKey('2nd','restock',t.id);
+    const chk = !!state.checks[k];
+    const div = document.createElement('div');
+    div.className = 'task-item';
+    div.dataset.k = k;
+    div.innerHTML = `
+      <div class="cb${chk?' on':''}" onclick="toggle('${k}',this)"></div>
+      <span class="task-lbl${chk?' done':''}" onclick="toggle('${k}',this.previousElementSibling)">
+        ${escHtml(t.text)}
+      </span>`;
+    el.insertBefore(div, notesWrap);
+  });
+  updateProg('2nd','restock','prog-2nd-restock');
+}
+
+// ══════════════════════════════════════════
+//  TOGGLE TASK
+// ══════════════════════════════════════════
+function toggle(k, cbEl) {
+  if (state.submitted) return;
+  const on = !cbEl.classList.contains('on');
+  state.checks[k] = on;
+  cbEl.classList.toggle('on', on);
+  const lbl = cbEl.nextElementSibling;
+  if (lbl) lbl.classList.toggle('done', on);
+  refreshAllProg(); save();
+}
+
+function toggleAdd(cbEl) {
+  if (state.submitted) return;
+  const shift = cbEl.dataset.shift, idx = +cbEl.dataset.idx;
+  const on = !cbEl.classList.contains('on');
+  cbEl.classList.toggle('on', on);
+  state.additionals[shift][idx].checked = on;
+  save();
+}
+
+function saveAdd(shift, idx, val) {
+  state.additionals[shift][idx].text = val;
+  save();
+}
+
+// ══════════════════════════════════════════
+//  FOLLOW-UP TABLE
+// ══════════════════════════════════════════
+function renderFu() {
+  const tbody = document.getElementById('fu-tbody');
+  tbody.innerHTML = '';
+  if (!state.followUps.length) { addFuRow(false); return; }
+  state.followUps.forEach((r, i) => appendFuRow(tbody, r, i));
+  updateFuProg();
+}
+
+function addFuRow(doSave = true) {
+  state.followUps.push({ c:'', s:'', notes:'', a1:false, a2:false });
+  const tbody = document.getElementById('fu-tbody');
+  appendFuRow(tbody, state.followUps[state.followUps.length-1], state.followUps.length-1);
+  if (doSave) save();
+  updateFuProg();
+}
+
+function appendFuRow(tbody, r, i) {
+  const tr = document.createElement('tr');
+  tr.dataset.i = i;
+  tr.innerHTML = `
+    <td><input class="fu-input" type="text" placeholder="Initials" value="${escHtml(r.c||'')}" maxlength="8"
+         oninput="fuUpd(${i},'c',this.value)"></td>
+    <td><input class="fu-input" type="text" placeholder="Initials" value="${escHtml(r.s||'')}" maxlength="8"
+         oninput="fuUpd(${i},'s',this.value)"></td>
+    <td><input class="fu-input" type="text" placeholder="Notes…" value="${escHtml(r.notes||'')}"
+         oninput="fuUpd(${i},'notes',this.value)"></td>
+    <td><div class="att-cell"><button class="att-btn${r.a1?' on':''}" onclick="fuAtt(${i},1,this)">1</button></div></td>
+    <td><div class="att-cell"><button class="att-btn${r.a2?' on':''}" onclick="fuAtt(${i},2,this)">2</button></div></td>
+    <td><button class="del-fu-btn" onclick="delFu(${i})">✕</button></td>`;
+  tbody.appendChild(tr);
+}
+
+function fuUpd(i, f, v) { state.followUps[i][f]=v; save(); updateFuProg(); }
+function fuAtt(i, n, btn) {
+  if (state.submitted) return;
+  const f = n===1?'a1':'a2';
+  state.followUps[i][f] = !state.followUps[i][f];
+  btn.classList.toggle('on', state.followUps[i][f]);
+  save(); updateFuProg();
+}
+function delFu(i) { state.followUps.splice(i,1); renderFu(); save(); }
+function updateFuProg() {
+  const el = document.getElementById('prog-1st-followups');
+  if (el) el.textContent = `${state.followUps.length} client${state.followUps.length!==1?'s':''}`;
+}
+
+// ══════════════════════════════════════════
+//  PROGRESS
+// ══════════════════════════════════════════
+function refreshAllProg() {
+  Object.keys(SECS).forEach(shift => {
+    SECS[shift].forEach(sec => updateProg(shift, sec.key, sec.progId));
+  });
+  updateFuProg();
+}
+
+function updateProg(shift, sec, progId) {
+  const el = document.getElementById(progId);
+  if (!el) return;
+  const all = tasks(shift, sec).filter(t => !t.wednesday || isWed);
+  const done = all.filter(t => state.checks[taskKey(shift,sec,t.id)]).length;
+  el.textContent = `${done}/${all.length}`;
+  el.className = 'sec-prog' + (done === all.length && all.length ? ' done' : '');
+}
+
+// ══════════════════════════════════════════
+//  SECTION COLLAPSE
+// ══════════════════════════════════════════
+function toggleSec(hdr) {
+  if (hdr.classList.contains('no-toggle')) return;
+  const body = hdr.nextElementSibling;
+  if (!body) return;
+  body.classList.toggle('collapsed');
+}
+
+// ══════════════════════════════════════════
+//  SHIFT SELECTION
+// ══════════════════════════════════════════
+function selectShift(s) {
+  state.activeShift = s;
+  document.querySelectorAll('.shift-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.shift-panel').forEach(p => p.classList.remove('active'));
+  document.getElementById(`tab-${s}`).classList.add('active');
+  document.getElementById(`panel-${s}`).classList.add('active');
+  save();
+}
+
+// ══════════════════════════════════════════
+//  SAVE / LOAD
+// ══════════════════════════════════════════
+function save() {
+  state.staffInitials = document.getElementById('staffInitials').value;
+  state.shiftDate = document.getElementById('shiftDate').value;
+  localStorage.setItem('ss_state', JSON.stringify(state));
+}
+
+function load() {
+  try {
+    const raw = localStorage.getItem('ss_state');
+    if (raw) {
+      const p = JSON.parse(raw);
+      // Deep merge to keep structure intact
+      state = { ...DEFAULT_STATE(), ...p,
+        checks: p.checks||{}, notes: { ...DEFAULT_STATE().notes, ...p.notes },
+        additionals: { ...DEFAULT_STATE().additionals, ...p.additionals },
+        customTasks: p.customTasks||{},
+        followUps: p.followUps||[],
+      };
+    }
+  } catch(e) { console.warn('Load error', e); }
+}
+
+// ══════════════════════════════════════════
+//  SUBMIT
+// ══════════════════════════════════════════
+function submitShift() {
+  if (!document.getElementById('staffInitials').value.trim()) {
+    toast('⚠ Enter your initials before submitting.'); return;
+  }
+  save();
+  state.submitted = true; save();
+  lockUI();
+  toast('✓ Shift submitted and locked!');
+  setTimeout(showSummary, 700);
+}
+
+function lockUI() {
+  document.getElementById('mainContent').classList.add('locked');
+  document.getElementById('lockedBanner').classList.add('show');
+  document.getElementById('submitBtn').disabled = true;
+}
+
+function resetForm() {
+  if (!confirm('Reset the form and start a new shift? All current data will be cleared.')) return;
+  localStorage.removeItem('ss_state');
+  location.reload();
+}
+
+// ══════════════════════════════════════════
+//  SUMMARY
+// ══════════════════════════════════════════
+function showSummary() {
+  document.getElementById('summaryOverlay').classList.add('open');
+  buildSummary();
+}
+function closeSummary() { document.getElementById('summaryOverlay').classList.remove('open'); }
+
+function buildSummary() {
+  const s = state.activeShift;
+  const initials = state.staffInitials || '—';
+  const dateStr = state.shiftDate
+    ? new Date(state.shiftDate+'T12:00:00').toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'})
+    : '—';
+
+  let html = `<div class="sum-meta">
+    <div class="sum-meta-item"><div class="sum-meta-lbl">Staff</div><div class="sum-meta-val">${escHtml(initials)}</div></div>
+    <div class="sum-meta-item"><div class="sum-meta-lbl">Shift</div><div class="sum-meta-val">${s} Shift</div></div>
+    <div class="sum-meta-item"><div class="sum-meta-lbl">Date</div><div class="sum-meta-val">${dateStr}</div></div>
+  </div>`;
+
+  SECS[s].forEach(sec => {
+    const list = tasks(s, sec.key).filter(t => !t.wednesday || isWed);
+    html += `<div class="sum-sec"><h4>${escHtml(sec.label)}</h4><ul class="sum-list">`;
+    list.forEach(t => {
+      const done = !!state.checks[taskKey(s, sec.key, t.id)];
+      html += `<li><span class="${done?'chk-ok':'chk-no'}">${done?'✓':'✗'}</span> ${escHtml(t.text)}</li>`;
+    });
+    html += '</ul>';
+    if (sec.key === 'restock' && s === '2nd' && state.restockItems) {
+      html += `<p style="font-size:.82rem;color:var(--muted);margin-top:.5rem;">Items needed: <strong>${escHtml(state.restockItems)}</strong></p>`;
+    }
+    html += '</div>';
+  });
+
+  // Follow-ups (1st shift)
+  if (s === '1st' && state.followUps.length) {
+    html += `<div class="sum-sec"><h4>Client Follow-Ups</h4>`;
+    state.followUps.forEach(f => {
+      if (!f.c) return;
+      html += `<div style="font-size:.85rem;padding:.28rem 0;border-bottom:1px solid var(--border);">
+        <strong>${escHtml(f.c)}</strong> (staff: ${escHtml(f.s||'—')}) — Att 1: ${f.a1?'✓':'✗'} | Att 2: ${f.a2?'✓':'✗'}
+        ${f.notes ? `<br><span style="color:var(--muted);font-size:.8rem;">${escHtml(f.notes)}</span>` : ''}
+      </div>`;
+    });
+    html += '</div>';
+  }
+
+  // Additionals
+  const adds = (state.additionals[s]||[]).filter(a => a.text.trim());
+  if (adds.length) {
+    html += `<div class="sum-sec"><h4>Additional Tasks</h4><ul class="sum-list">`;
+    adds.forEach(a => { html += `<li><span class="${a.checked?'chk-ok':'chk-no'}">${a.checked?'✓':'✗'}</span> ${escHtml(a.text)}</li>`; });
+    html += '</ul></div>';
+  }
+
+  // Notes
+  const n = state.notes[s] || '';
+  if (n) html += `<div class="sum-sec"><h4>Shift Notes for Leadership</h4><div class="sum-notes">${escHtml(n)}</div></div>`;
+
+  document.getElementById('summaryContent').innerHTML = html;
+}
+
+// ══════════════════════════════════════════
+//  ADMIN PANEL
+// ══════════════════════════════════════════
+function openAdmin() {
+  document.getElementById('loginOverlay').classList.add('open');
+  document.getElementById('adminPw').value = '';
+  document.getElementById('loginErr').style.display = 'none';
+  setTimeout(() => document.getElementById('adminPw').focus(), 80);
+}
+function closeLogin() { document.getElementById('loginOverlay').classList.remove('open'); }
+function doLogin() {
+  if (document.getElementById('adminPw').value === 'admin') {
+    closeLogin();
+    document.getElementById('adminOverlay').classList.add('open');
+    renderAdmin(curAdminShift);
+  } else {
+    document.getElementById('loginErr').style.display = 'block';
+    document.getElementById('adminPw').value = '';
+    document.getElementById('adminPw').focus();
+  }
+}
+function closeAdmin() {
+  document.getElementById('adminOverlay').classList.remove('open');
+  renderAll(); refreshAllProg();
+}
+function selAdminShift(s, btn) {
+  curAdminShift = s;
+  document.querySelectorAll('.admin-tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  renderAdmin(s);
+}
+
+function getCustom(k) {
+  const [shift, sec] = splitKey(k);
+  if (!state.customTasks[k]) {
+    state.customTasks[k] = (DEFAULTS[shift]?.[sec]||[]).map(t=>({...t}));
+  }
+  return state.customTasks[k];
+}
+
+function splitKey(k) {
+  // k = "1st-start" | "2nd-restock" | "3rd-lockbox" etc.
+  const i = k.indexOf('-');
+  return [k.slice(0,i), k.slice(i+1)];
+}
+
+function renderAdmin(shift) {
+  let html = '';
+  SECS[shift].forEach(sec => {
+    const k = `${shift}-${sec.key}`;
+    const list = getCustom(k);
+    html += `<div class="admin-sec-group"><h4>${escHtml(sec.label)}</h4><div id="arows-${k}">`;
+    list.forEach((t,i) => { html += adminRow(k,t,i); });
+    html += `</div>
+      <div class="admin-add-row">
+        <input class="admin-add-inp" type="text" id="ainp-${k}" placeholder="New task…">
+        <button class="admin-add-btn" onclick="adminAdd('${k}')">+ Add</button>
+      </div></div>`;
+  });
+  document.getElementById('adminContent').innerHTML = html;
+}
+
+function adminRow(k, t, i) {
+  const wedBtn = t.wednesday
+    ? `<span class="wed-toggle" onclick="adminToggleWed('${k}',${i})">WED ✓</span>`
+    : `<button class="ab ab-edit" onclick="adminToggleWed('${k}',${i})">+ WED</button>`;
+  return `<div class="admin-row" id="arow-${k}-${i}">
+    <span class="admin-row-text">${escHtml(t.text)}</span>
+    ${wedBtn}
+    <button class="ab ab-edit" onclick="adminEdit('${k}',${i})">Edit</button>
+    <button class="ab ab-del"  onclick="adminDel('${k}',${i})">Del</button>
+  </div>`;
+}
+
+function adminEdit(k, i) {
+  const t = getCustom(k)[i];
+  const row = document.getElementById(`arow-${k}-${i}`);
+  row.innerHTML = `
+    <input class="admin-edit-inp" type="text" id="aedit-${k}-${i}" value="${escHtml(t.text)}">
+    <button class="ab ab-save"   onclick="adminSave('${k}',${i})">Save</button>
+    <button class="ab ab-cancel" onclick="renderAdmin(curAdminShift)">Cancel</button>`;
+}
+function adminSave(k, i) {
+  const inp = document.getElementById(`aedit-${k}-${i}`);
+  if (!inp?.value.trim()) return;
+  getCustom(k)[i].text = inp.value.trim(); save(); renderAdmin(curAdminShift);
+}
+function adminDel(k, i) {
+  getCustom(k).splice(i,1); save(); renderAdmin(curAdminShift);
+}
+function adminToggleWed(k, i) {
+  getCustom(k)[i].wednesday = !getCustom(k)[i].wednesday; save(); renderAdmin(curAdminShift);
+}
+function adminAdd(k) {
+  const inp = document.getElementById(`ainp-${k}`);
+  if (!inp?.value.trim()) return;
+  getCustom(k).push({ id:'c'+Date.now(), text:inp.value.trim(), wednesday:false });
+  inp.value=''; save(); renderAdmin(curAdminShift);
+}
+
+// ══════════════════════════════════════════
+//  TOAST
+// ══════════════════════════════════════════
+function toast(msg) {
+  const el = document.getElementById('toast');
+  el.textContent = msg; el.classList.add('show');
+  setTimeout(() => el.classList.remove('show'), 3000);
+}
+
+// ══════════════════════════════════════════
+//  UTILITY
+// ══════════════════════════════════════════
+function escHtml(s) {
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+// ══════════════════════════════════════════
+//  EVENTS
+// ══════════════════════════════════════════
+document.getElementById('summaryOverlay').addEventListener('click', e => { if(e.target===e.currentTarget) closeSummary(); });
+document.getElementById('staffInitials').addEventListener('input', save);
+document.getElementById('shiftDate').addEventListener('change', function() {
+  const d = new Date(this.value+'T12:00:00');
+  isWed = d.getDay() === 3;
+  save(); renderAll(); refreshAllProg();
+});
+document.addEventListener('keydown', e => {
+  if (e.key==='Escape') {
+    closeSummary();
+    document.getElementById('loginOverlay').classList.remove('open');
+    document.getElementById('adminOverlay').classList.remove('open');
+  }
+});
+
+// ══════════════════════════════════════════
+//  INIT
+// ══════════════════════════════════════════
+function init() {
+  // Set today's date as default
+  const today = new Date();
+  isWed = today.getDay() === 3;
+  const todayStr = today.toISOString().split('T')[0];
+
+  load();
+
+  // Set date field
+  const dateEl = document.getElementById('shiftDate');
+  dateEl.value = state.shiftDate || todayStr;
+  if (state.shiftDate) {
+    const d = new Date(state.shiftDate+'T12:00:00');
+    isWed = d.getDay() === 3;
+  }
+
+  document.getElementById('staffInitials').value = state.staffInitials || '';
+
+  // Render tasks
+  renderAll();
+  renderFu();
+
+  // Restore additionals
+  ['1st','2nd','3rd'].forEach(shift => {
+    [0,1].forEach(idx => {
+      const item = state.additionals[shift]?.[idx];
+      const inp = document.getElementById(`add-${shift}-${idx}`);
+      if (inp && item) { inp.value = item.text || ''; }
+      if (item?.checked) {
+        const cb = document.querySelector(`.cb[data-shift="${shift}"][data-idx="${idx}"]`);
+        if (cb) cb.classList.add('on');
+      }
+    });
+    const notesEl = document.getElementById(`notes-${shift}`);
+    if (notesEl) notesEl.value = state.notes[shift] || '';
+  });
+
+  const ri = document.getElementById('restock-items');
+  if (ri) ri.value = state.restockItems || '';
+
+  // Restore active shift
+  selectShift(state.activeShift || '1st');
+
+  if (state.submitted) lockUI();
+  refreshAllProg();
+}
+
+// ══════════════════════════════════════════
+//  SERVICE WORKER
+// ══════════════════════════════════════════
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js')
+      .then(r => console.log('SW:', r.scope))
+      .catch(e => console.warn('SW failed:', e));
+  });
+}
+
+init();
+</script>
+</body>
+</html>
