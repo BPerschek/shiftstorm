@@ -5,351 +5,650 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>ShiftStorm – Foundation2</title>
   <link rel="manifest" href="/manifest.json">
-  <meta name="theme-color" content="#1a3a5c">
+  <meta name="theme-color" content="#0f2645">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="ShiftStorm">
   <style>
     :root {
-      --navy:       #1a3a5c;
-      --navy-mid:   #2563a8;
-      --teal:       #00b4a6;
-      --teal-dk:    #008f84;
-      --bg:         #eef2f7;
-      --surface:    #ffffff;
-      --surface2:   #f7f9fc;
-      --border:     #dde3ea;
-      --text:       #1a2333;
-      --muted:      #6b7a8f;
-      --green:      #16a34a;
-      --amber:      #d97706;
-      --red:        #dc2626;
-      --r:          10px;
-      --sh:         0 2px 8px rgba(0,0,0,.08);
-      --sh-lg:      0 8px 28px rgba(0,0,0,.13);
+      --navy:      #0f2645;
+      --navy-mid:  #1e40af;
+      --teal:      #0d9488;
+      --teal-lt:   #ccfbf1;
+      --bg:        #f1f5f9;
+      --surface:   #ffffff;
+      --surface2:  #f8fafc;
+      --border:    #e2e8f0;
+      --text:      #0f172a;
+      --muted:     #64748b;
+      --green:     #059669;
+      --green-lt:  #d1fae5;
+      --amber:     #d97706;
+      --amber-lt:  #fef3c7;
+      --red:       #dc2626;
+      --r:         14px;
+      --r-sm:      10px;
+      --sh:        0 1px 2px rgba(0,0,0,.05), 0 4px 14px rgba(0,0,0,.04);
+      --sh-lg:     0 10px 40px rgba(0,0,0,.14);
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { font-size: 16px; scroll-behavior: smooth; -webkit-tap-highlight-color: transparent; }
+    html { font-size: 16px; -webkit-tap-highlight-color: transparent; }
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
-      background: var(--bg); color: var(--text); min-height: 100vh; line-height: 1.5;
+      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100dvh;
+      line-height: 1.5;
+      padding-bottom: env(safe-area-inset-bottom);
     }
 
     /* ── Header ── */
     .app-header {
-      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%);
-      color: #fff; padding: .9rem 1.1rem;
-      position: sticky; top: 0; z-index: 100;
-      box-shadow: 0 2px 14px rgba(0,0,0,.25);
+      background: var(--navy);
+      color: #fff;
+      padding: .75rem 1rem;
+      padding-top: calc(.75rem + env(safe-area-inset-top));
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 1px 0 rgba(255,255,255,.05), 0 4px 24px rgba(0,0,0,.3);
     }
-    .header-inner { max-width: 800px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: .75rem; }
-    .logo { display: flex; align-items: center; gap: .6rem; }
-    .logo-icon { width: 38px; height: 38px; background: var(--teal); border-radius: 9px; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; flex-shrink: 0; }
-    .logo-name { font-size: 1.25rem; font-weight: 800; letter-spacing: -.02em; }
-    .logo-org  { font-size: .68rem; opacity: .75; letter-spacing: .06em; text-transform: uppercase; }
-    .hdr-btns  { display: flex; gap: .4rem; flex-shrink: 0; }
+    .header-inner {
+      max-width: 680px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: .75rem;
+    }
+    .logo { display: flex; align-items: center; gap: .55rem; }
+    .logo-bolt {
+      width: 34px; height: 34px;
+      background: linear-gradient(135deg, var(--teal), #14b8a6);
+      border-radius: 9px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem; flex-shrink: 0;
+      box-shadow: 0 2px 10px rgba(13,148,136,.45);
+    }
+    .logo-name { font-size: 1.1rem; font-weight: 800; letter-spacing: -.025em; line-height: 1.1; }
+    .logo-sub  { font-size: .6rem; opacity: .5; letter-spacing: .1em; text-transform: uppercase; }
+    .hdr-btns  { display: flex; gap: .3rem; }
     .hdr-btn {
-      background: rgba(255,255,255,.15); border: 1px solid rgba(255,255,255,.22);
-      color: #fff; border-radius: 8px; padding: .38rem .75rem;
-      cursor: pointer; font-size: .78rem; transition: background .18s;
-      display: flex; align-items: center; gap: .35rem; white-space: nowrap;
+      background: rgba(255,255,255,.09);
+      border: 1px solid rgba(255,255,255,.13);
+      color: rgba(255,255,255,.88);
+      border-radius: 9px;
+      padding: .4rem .7rem;
+      cursor: pointer;
+      font-size: .74rem;
+      font-weight: 600;
+      display: flex; align-items: center; gap: .3rem;
+      white-space: nowrap;
+      min-height: 36px;
+      transition: background .15s;
     }
-    .hdr-btn:hover { background: rgba(255,255,255,.28); }
+    .hdr-btn:active { background: rgba(255,255,255,.2); }
 
     /* ── Layout ── */
-    .main { max-width: 800px; margin: 0 auto; padding: .9rem .9rem 2rem; }
+    .main {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: .85rem .85rem 5.5rem;
+    }
 
     /* ── Locked Banner ── */
     .locked-banner {
-      background: linear-gradient(135deg, var(--green), #15803d);
-      color: #fff; border-radius: var(--r); padding: .75rem 1.1rem;
-      margin-bottom: .9rem; display: none; align-items: center; gap: .7rem; font-weight: 600; font-size: .88rem;
+      background: var(--green);
+      color: #fff;
+      border-radius: var(--r-sm);
+      padding: .7rem 1rem;
+      margin-bottom: .85rem;
+      display: none;
+      align-items: center;
+      gap: .6rem;
+      font-weight: 600;
+      font-size: .85rem;
     }
     .locked-banner.show { display: flex; }
     .unlock-mini {
-      margin-left: auto; background: rgba(255,255,255,.25); border: none;
-      border-radius: 6px; color: #fff; cursor: pointer; padding: .2rem .65rem; font-size: .78rem;
+      margin-left: auto;
+      background: rgba(255,255,255,.22);
+      border: none; border-radius: 6px;
+      color: #fff; cursor: pointer;
+      padding: .22rem .6rem;
+      font-size: .76rem; font-weight: 600;
     }
 
     /* ── Staff Card ── */
     .staff-card {
-      background: var(--surface); border: 1px solid var(--border); border-radius: var(--r);
-      padding: 1.1rem; margin-bottom: .9rem; box-shadow: var(--sh);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r);
+      padding: 1rem;
+      margin-bottom: .85rem;
+      box-shadow: var(--sh);
     }
-    .staff-card h3 { font-size: .7rem; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin-bottom: .7rem; }
-    .staff-fields { display: grid; grid-template-columns: 1fr 1fr; gap: .65rem; }
-    .fld { display: flex; flex-direction: column; gap: .25rem; }
-    .fld label { font-size: .78rem; font-weight: 600; color: var(--muted); }
+    .card-label {
+      font-size: .65rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: .1em;
+      color: var(--muted); margin-bottom: .65rem;
+    }
+    .staff-fields { display: grid; grid-template-columns: 1fr 1fr; gap: .6rem; }
+    .fld { display: flex; flex-direction: column; gap: .22rem; }
+    .fld label { font-size: .74rem; font-weight: 600; color: var(--muted); }
     .fld input, .fld select {
-      border: 1.5px solid var(--border); border-radius: 8px; padding: .55rem .7rem;
-      font-size: .93rem; color: var(--text); background: var(--surface); width: 100%;
-      transition: border-color .18s;
+      border: 1.5px solid var(--border);
+      border-radius: 9px;
+      padding: .6rem .75rem;
+      font-size: .92rem;
+      color: var(--text);
+      background: var(--surface2);
+      width: 100%;
+      min-height: 44px;
+      transition: border-color .15s, box-shadow .15s;
     }
-    .fld input:focus, .fld select:focus { outline: none; border-color: var(--teal); }
+    .fld input:focus, .fld select:focus {
+      outline: none;
+      border-color: var(--teal);
+      box-shadow: 0 0 0 3px rgba(13,148,136,.12);
+      background: #fff;
+    }
 
     /* ── Shift Tabs ── */
-    .shift-tabs { display: grid; grid-template-columns: repeat(3,1fr); gap: .5rem; margin-bottom: .9rem; }
-    .shift-tab {
-      background: var(--surface); border: 2px solid var(--border); border-radius: var(--r);
-      padding: .7rem .4rem; cursor: pointer; text-align: center; transition: all .18s; color: var(--muted);
-      user-select: none;
+    .shift-tabs {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r);
+      padding: .3rem;
+      display: grid;
+      grid-template-columns: repeat(3,1fr);
+      gap: .25rem;
+      margin-bottom: .85rem;
+      box-shadow: var(--sh);
     }
-    .shift-tab:hover:not(.active) { border-color: var(--navy-mid); color: var(--navy); }
-    .shift-tab.active { border-color: var(--teal); background: var(--teal); color: #fff; }
-    .st-label { font-size: .84rem; font-weight: 700; }
-    .st-due   { font-size: .68rem; opacity: .82; margin-top: .05rem; }
+    .shift-tab {
+      border-radius: 10px;
+      padding: .55rem .3rem;
+      cursor: pointer;
+      text-align: center;
+      transition: all .2s cubic-bezier(.4,0,.2,1);
+      user-select: none;
+      min-height: 58px;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: .08rem;
+    }
+    .shift-tab:not(.active):active { background: var(--bg); }
+    .shift-tab.active {
+      background: var(--navy);
+      box-shadow: 0 2px 12px rgba(15,38,69,.28);
+    }
+    .st-emoji { font-size: 1.1rem; line-height: 1; }
+    .st-label { font-size: .78rem; font-weight: 700; color: var(--muted); line-height: 1.1; }
+    .shift-tab.active .st-label { color: #fff; }
+    .st-due { font-size: .6rem; color: var(--muted); opacity: .8; }
+    .shift-tab.active .st-due { color: rgba(255,255,255,.55); }
 
     /* ── Shift Panels ── */
     .shift-panel { display: none; }
     .shift-panel.active { display: block; }
 
     /* ── Section Card ── */
-    .sec-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r); margin-bottom: .85rem; box-shadow: var(--sh); overflow: hidden; }
-    .sec-hdr {
-      display: flex; align-items: center; justify-content: space-between;
-      padding: .85rem 1.1rem; background: var(--surface2); border-bottom: 1px solid var(--border);
-      cursor: pointer; user-select: none; gap: .5rem;
+    .sec-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r);
+      margin-bottom: .7rem;
+      box-shadow: var(--sh);
+      overflow: hidden;
     }
+    .sec-hdr {
+      display: flex; align-items: center;
+      padding: .78rem 1rem;
+      gap: .6rem;
+      cursor: pointer;
+      user-select: none;
+      transition: background .12s;
+    }
+    .sec-hdr:active { background: var(--surface2); }
     .sec-hdr.no-toggle { cursor: default; }
-    .sec-title { font-size: .92rem; font-weight: 700; color: var(--navy); display: flex; align-items: center; gap: .55rem; }
-    .sec-icon {
-      width: 28px; height: 28px; background: var(--teal); border-radius: 6px;
-      display: flex; align-items: center; justify-content: center; font-size: .82rem; color: #fff; flex-shrink: 0;
+    .sec-hdr.no-toggle:active { background: transparent; }
+    .sec-icon-wrap {
+      width: 30px; height: 30px;
+      background: var(--navy);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: .82rem; flex-shrink: 0;
+    }
+    .sec-title-text {
+      flex: 1;
+      font-size: .88rem;
+      font-weight: 700;
+      color: var(--text);
     }
     .sec-prog {
-      font-size: .72rem; color: var(--muted); background: var(--bg);
-      border-radius: 20px; padding: .18rem .58rem; white-space: nowrap; flex-shrink: 0;
+      font-size: .68rem; font-weight: 700;
+      color: var(--muted);
+      background: var(--bg);
+      border-radius: 20px;
+      padding: .16rem .48rem;
+      white-space: nowrap;
+      flex-shrink: 0;
     }
-    .sec-prog.done { background: rgba(22,163,74,.12); color: var(--green); }
-    .sec-body { padding: .6rem .9rem; }
+    .sec-prog.done { background: var(--green-lt); color: var(--green); }
+    .chevron {
+      font-size: .6rem; color: var(--muted);
+      transition: transform .22s cubic-bezier(.4,0,.2,1);
+      flex-shrink: 0; line-height: 1;
+    }
+    .sec-hdr.collapsed-hdr .chevron { transform: rotate(-90deg); }
+    .sec-divider { height: 1px; background: var(--border); }
+    .sec-body { padding: .2rem .8rem .5rem; }
     .sec-body.collapsed { display: none; }
 
     /* ── Task Item ── */
     .task-item {
-      display: flex; align-items: flex-start; gap: .7rem;
-      padding: .6rem .2rem; border-bottom: 1px solid var(--border);
+      display: flex; align-items: flex-start;
+      gap: .75rem;
+      padding: .62rem .15rem;
+      border-bottom: 1px solid var(--border);
+      cursor: pointer;
     }
     .task-item:last-child { border-bottom: none; }
     .task-item.hidden { display: none !important; }
+    .task-item:active .task-lbl { opacity: .65; }
 
+    /* Checkbox */
     .cb {
-      width: 23px; height: 23px; min-width: 23px; border-radius: 6px;
-      border: 2px solid var(--border); background: var(--surface);
-      cursor: pointer; display: flex; align-items: center; justify-content: center;
-      transition: all .14s; margin-top: 1px;
+      width: 26px; height: 26px; min-width: 26px;
+      border-radius: 7px;
+      border: 2px solid #cbd5e1;
+      background: #fff;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: all .18s cubic-bezier(.34,1.56,.64,1);
+      margin-top: 1px; flex-shrink: 0;
+      position: relative;
     }
-    .cb.on { background: var(--teal); border-color: var(--teal); }
-    .cb.on::after { content: '✓'; color: #fff; font-size: .8rem; font-weight: 700; }
+    .cb.on {
+      background: var(--teal);
+      border-color: var(--teal);
+      transform: scale(1.1);
+    }
+    .cb.on::after {
+      content: '';
+      display: block;
+      width: 10px; height: 6px;
+      border-left: 2.5px solid #fff;
+      border-bottom: 2.5px solid #fff;
+      transform: rotate(-45deg) translate(0px, -1px);
+    }
 
-    .task-lbl { flex: 1; font-size: .88rem; color: var(--text); cursor: pointer; line-height: 1.4; }
-    .task-lbl.done { text-decoration: line-through; color: var(--muted); }
+    .task-lbl {
+      flex: 1; font-size: .875rem;
+      color: var(--text); line-height: 1.45;
+      padding-top: 1px; transition: color .15s;
+    }
+    .task-lbl.done { text-decoration: line-through; color: #94a3b8; }
     .wed-pill {
-      font-size: .62rem; background: var(--amber); color: #fff;
-      border-radius: 4px; padding: .08rem .38rem; font-weight: 700; white-space: nowrap; margin-top: 2px;
+      display: inline-block;
+      font-size: .57rem;
+      background: var(--amber-lt);
+      color: var(--amber);
+      border: 1px solid rgba(217,119,6,.22);
+      border-radius: 4px;
+      padding: .05rem .3rem;
+      font-weight: 700;
+      margin-left: .25rem;
+      vertical-align: middle;
     }
 
     /* ── Follow-Up Table ── */
     .fu-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
-    .fu-table { width: 100%; border-collapse: collapse; font-size: .82rem; min-width: 420px; }
+    .fu-table { width: 100%; border-collapse: collapse; font-size: .8rem; min-width: 390px; }
     .fu-table th {
-      background: var(--bg); color: var(--muted); font-size: .68rem; text-transform: uppercase;
-      letter-spacing: .05em; padding: .45rem .38rem; text-align: left; border-bottom: 2px solid var(--border);
+      background: var(--bg); color: var(--muted);
+      font-size: .63rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: .06em;
+      padding: .42rem .38rem; text-align: left;
+      border-bottom: 2px solid var(--border);
     }
-    .fu-table td { padding: .35rem .38rem; border-bottom: 1px solid var(--border); vertical-align: middle; }
+    .fu-table td { padding: .3rem .38rem; border-bottom: 1px solid var(--border); vertical-align: middle; }
     .fu-table tr:last-child td { border-bottom: none; }
     .fu-input {
-      width: 100%; border: 1px solid var(--border); border-radius: 6px;
-      padding: .3rem .48rem; font-size: .8rem; color: var(--text); background: var(--surface);
+      width: 100%; border: 1.5px solid var(--border);
+      border-radius: 7px; padding: .28rem .48rem;
+      font-size: .78rem; color: var(--text);
+      background: var(--surface2); min-height: 34px;
     }
-    .fu-input:focus { outline: none; border-color: var(--teal); }
-    .att-cell { display: flex; gap: .35rem; justify-content: center; }
+    .fu-input:focus { outline: none; border-color: var(--teal); background: #fff; }
+    .att-cell { display: flex; gap: .3rem; justify-content: center; }
     .att-btn {
-      width: 26px; height: 26px; border-radius: 50%; border: 2px solid var(--border);
-      background: var(--surface); cursor: pointer; font-size: .7rem; font-weight: 700;
-      display: flex; align-items: center; justify-content: center; transition: all .14s; color: var(--muted);
+      width: 28px; height: 28px;
+      border-radius: 7px;
+      border: 1.5px solid var(--border);
+      background: var(--surface2);
+      cursor: pointer; font-size: .7rem; font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+      transition: all .15s; color: var(--muted);
     }
     .att-btn.on { background: var(--green); border-color: var(--green); color: #fff; }
     .add-fu-btn {
-      margin-top: .7rem; font-size: .8rem; border: none; border-radius: 7px;
-      cursor: pointer; padding: .38rem .8rem; background: var(--teal); color: #fff; transition: opacity .15s;
+      margin-top: .6rem;
+      font-size: .78rem; font-weight: 600;
+      border: 1.5px dashed var(--border);
+      border-radius: 9px; cursor: pointer;
+      padding: .42rem .8rem;
+      background: transparent; color: var(--muted);
+      transition: all .15s; width: 100%;
     }
-    .add-fu-btn:hover { opacity: .88; }
+    .add-fu-btn:active { background: var(--bg); border-color: var(--teal); color: var(--teal); }
     .del-fu-btn {
-      background: var(--bg); color: var(--red); border: none;
-      border-radius: 50%; width: 26px; height: 26px; cursor: pointer;
-      font-size: .85rem; display: flex; align-items: center; justify-content: center;
+      background: none; color: #cbd5e1; border: none;
+      width: 28px; height: 28px; cursor: pointer;
+      font-size: .9rem;
+      display: flex; align-items: center; justify-content: center;
+      border-radius: 50%; transition: all .15s;
     }
+    .del-fu-btn:active { background: #fee2e2; color: var(--red); }
 
-    /* ── Restocking notes ── */
-    .restock-notes { margin-top: .75rem; }
-    .restock-notes label { font-size: .76rem; font-weight: 600; color: var(--muted); display: block; margin-bottom: .35rem; }
-    .restock-notes textarea {
-      width: 100%; border: 1.5px solid var(--border); border-radius: 8px;
-      padding: .58rem .7rem; font-size: .84rem; min-height: 72px; resize: vertical;
-      color: var(--text); font-family: inherit;
+    /* ── Restock Notes ── */
+    .restock-notes { margin-top: .65rem; }
+    .restock-notes label {
+      font-size: .72rem; font-weight: 600;
+      color: var(--muted); display: block; margin-bottom: .3rem;
     }
-    .restock-notes textarea:focus { outline: none; border-color: var(--teal); }
+    .restock-notes textarea {
+      width: 100%; border: 1.5px solid var(--border);
+      border-radius: 9px; padding: .58rem .72rem;
+      font-size: .84rem; min-height: 70px;
+      resize: vertical; color: var(--text);
+      font-family: inherit; background: var(--surface2);
+    }
+    .restock-notes textarea:focus {
+      outline: none; border-color: var(--teal);
+      box-shadow: 0 0 0 3px rgba(13,148,136,.1); background: #fff;
+    }
 
     /* ── Additional Tasks ── */
-    .add-task-row { display: flex; align-items: center; gap: .7rem; padding: .6rem .2rem; border-bottom: 1px solid var(--border); }
+    .add-task-row {
+      display: flex; align-items: center;
+      gap: .65rem; padding: .52rem .15rem;
+      border-bottom: 1px solid var(--border);
+    }
     .add-task-row:last-child { border-bottom: none; }
     .add-task-inp {
-      flex: 1; border: 1.5px solid var(--border); border-radius: 8px;
-      padding: .48rem .7rem; font-size: .88rem; color: var(--text); background: var(--surface);
+      flex: 1; border: 1.5px solid var(--border);
+      border-radius: 8px; padding: .5rem .7rem;
+      font-size: .86rem; color: var(--text);
+      background: var(--surface2); min-height: 40px;
     }
-    .add-task-inp:focus { outline: none; border-color: var(--teal); }
+    .add-task-inp:focus { outline: none; border-color: var(--teal); background: #fff; }
 
     /* ── Shift Notes ── */
-    .notes-area { padding: .7rem .9rem; }
+    .notes-area { padding: .55rem .8rem .75rem; }
     .notes-area textarea {
-      width: 100%; border: 1.5px solid var(--border); border-radius: 8px;
-      padding: .7rem; font-size: .88rem; min-height: 110px; resize: vertical;
-      color: var(--text); font-family: inherit;
+      width: 100%; border: 1.5px solid var(--border);
+      border-radius: 9px; padding: .68rem .75rem;
+      font-size: .875rem; min-height: 96px;
+      resize: vertical; color: var(--text);
+      font-family: inherit; background: var(--surface2);
     }
-    .notes-area textarea:focus { outline: none; border-color: var(--teal); }
+    .notes-area textarea:focus {
+      outline: none; border-color: var(--teal);
+      box-shadow: 0 0 0 3px rgba(13,148,136,.1); background: #fff;
+    }
 
     /* ── Submit ── */
-    .submit-row { padding: 1rem 0 2.5rem; text-align: center; }
+    .submit-row { padding: 1.1rem 0 .75rem; }
     .submit-btn {
-      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%);
-      color: #fff; border: none; border-radius: 12px; padding: .95rem 2.5rem;
-      font-size: .98rem; font-weight: 700; cursor: pointer;
-      box-shadow: 0 4px 18px rgba(26,58,92,.32); transition: all .18s; letter-spacing: .02em;
+      width: 100%;
+      background: var(--navy);
+      color: #fff; border: none;
+      border-radius: 14px;
+      padding: 1rem 2rem;
+      font-size: .95rem; font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 4px 22px rgba(15,38,69,.3);
+      transition: all .18s;
+      display: flex; align-items: center; justify-content: center;
+      gap: .45rem; min-height: 52px;
     }
-    .submit-btn:hover { transform: translateY(-1px); box-shadow: 0 6px 22px rgba(26,58,92,.42); }
-    .submit-btn:active { transform: translateY(0); }
-    .submit-btn:disabled { opacity: .5; cursor: not-allowed; transform: none; box-shadow: none; }
+    .submit-btn:active { transform: scale(.98); box-shadow: 0 2px 10px rgba(15,38,69,.2); }
+    .submit-btn:disabled { opacity: .45; cursor: not-allowed; transform: none; box-shadow: none; }
     .reset-link {
-      display: block; margin-top: .75rem; font-size: .82rem; color: var(--muted);
-      cursor: pointer; background: none; border: none; text-decoration: underline;
+      display: block; text-align: center;
+      margin-top: .85rem;
+      font-size: .8rem; color: var(--muted);
+      cursor: pointer; background: none; border: none;
+      padding: .5rem; width: 100%;
     }
-    .reset-link:hover { color: var(--text); }
+    .reset-link:active { color: var(--red); }
 
     /* ── Summary Modal ── */
     .overlay {
-      display: none; position: fixed; inset: 0; background: rgba(0,0,0,.48); z-index: 200;
+      display: none; position: fixed; inset: 0;
+      background: rgba(15,23,42,.55);
+      z-index: 200;
       align-items: flex-end; justify-content: center;
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
     }
     .overlay.open { display: flex; }
     .modal {
-      background: var(--surface); border-radius: 20px 20px 0 0;
-      width: 100%; max-width: 800px; max-height: 88vh; overflow-y: auto;
-      padding: 1.4rem; animation: slideUp .28s ease;
+      background: var(--surface);
+      border-radius: 22px 22px 0 0;
+      width: 100%; max-width: 680px;
+      max-height: 88vh; overflow-y: auto;
+      padding: 0 1.25rem 1.25rem;
+      padding-bottom: calc(1.25rem + env(safe-area-inset-bottom));
+      animation: slideUp .3s cubic-bezier(.22,1,.36,1);
     }
     @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
-    .modal-hdr { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.1rem; padding-bottom: .9rem; border-bottom: 1px solid var(--border); }
-    .modal-title { font-size: 1.05rem; font-weight: 700; color: var(--navy); }
-    .modal-close { background: var(--bg); border: none; border-radius: 50%; width: 32px; height: 32px; cursor: pointer; font-size: 1rem; display: flex; align-items: center; justify-content: center; }
-    .sum-meta { display: grid; grid-template-columns: repeat(3,1fr); gap: .65rem; margin-bottom: 1.1rem; }
-    .sum-meta-item { background: var(--bg); border-radius: 8px; padding: .68rem; text-align: center; }
-    .sum-meta-lbl { font-size: .66rem; color: var(--muted); text-transform: uppercase; letter-spacing: .05em; }
-    .sum-meta-val { font-size: .98rem; font-weight: 700; color: var(--navy); margin-top: .15rem; }
-    .sum-sec { margin-bottom: .9rem; }
-    .sum-sec h4 { font-size: .72rem; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); margin-bottom: .45rem; }
+    .modal-drag {
+      width: 38px; height: 4px;
+      background: var(--border);
+      border-radius: 2px;
+      margin: .9rem auto .85rem;
+    }
+    .modal-hdr {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 1rem;
+    }
+    .modal-title { font-size: 1rem; font-weight: 800; color: var(--text); }
+    .modal-close {
+      background: var(--bg); border: none; border-radius: 50%;
+      width: 32px; height: 32px; cursor: pointer;
+      font-size: .85rem;
+      display: flex; align-items: center; justify-content: center; color: var(--muted);
+    }
+    .modal-close:active { background: var(--border); }
+    .sum-meta { display: grid; grid-template-columns: repeat(3,1fr); gap: .5rem; margin-bottom: 1rem; }
+    .sum-meta-item { background: var(--bg); border-radius: 10px; padding: .65rem; text-align: center; }
+    .sum-meta-lbl { font-size: .6rem; color: var(--muted); text-transform: uppercase; letter-spacing: .07em; font-weight: 700; }
+    .sum-meta-val { font-size: .95rem; font-weight: 800; color: var(--text); margin-top: .15rem; }
+    .sum-sec { margin-bottom: .85rem; }
+    .sum-sec h4 {
+      font-size: .66rem; text-transform: uppercase;
+      letter-spacing: .09em; color: var(--muted); font-weight: 700;
+      margin-bottom: .4rem; padding-bottom: .35rem;
+      border-bottom: 1px solid var(--border);
+    }
     .sum-list { list-style: none; }
-    .sum-list li { display: flex; align-items: center; gap: .45rem; font-size: .86rem; padding: .25rem 0; }
-    .chk-ok  { color: var(--green); }
-    .chk-no  { color: var(--red); }
-    .sum-notes { background: var(--bg); border-radius: 8px; padding: .7rem; font-size: .86rem; color: var(--text); white-space: pre-wrap; }
+    .sum-list li { display: flex; align-items: center; gap: .4rem; font-size: .85rem; padding: .2rem 0; }
+    .chk-ok { color: var(--green); font-weight: 700; }
+    .chk-no { color: #cbd5e1; }
+    .sum-notes { background: var(--bg); border-radius: 8px; padding: .65rem; font-size: .84rem; white-space: pre-wrap; }
 
     /* ── Admin Login ── */
     .login-overlay {
-      display: none; position: fixed; inset: 0; background: rgba(26,58,92,.92);
-      z-index: 300; align-items: center; justify-content: center;
+      display: none; position: fixed; inset: 0;
+      background: rgba(15,38,69,.88);
+      z-index: 300;
+      align-items: center; justify-content: center;
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
     }
     .login-overlay.open { display: flex; }
     .login-card {
-      background: var(--surface); border-radius: 16px; padding: 1.8rem;
-      width: 100%; max-width: 360px; margin: 1rem; box-shadow: var(--sh-lg);
+      background: var(--surface); border-radius: 20px;
+      padding: 1.75rem; width: 100%; max-width: 340px;
+      margin: 1rem; box-shadow: var(--sh-lg);
     }
-    .login-title    { font-size: 1.05rem; font-weight: 700; color: var(--navy); margin-bottom: .25rem; }
-    .login-subtitle { font-size: .83rem; color: var(--muted); margin-bottom: 1.1rem; }
+    .login-title    { font-size: 1rem; font-weight: 800; margin-bottom: .2rem; }
+    .login-subtitle { font-size: .81rem; color: var(--muted); margin-bottom: 1rem; }
     .login-inp {
-      width: 100%; border: 1.5px solid var(--border); border-radius: 8px;
-      padding: .65rem .85rem; font-size: .93rem; margin-bottom: .65rem; color: var(--text);
+      width: 100%; border: 1.5px solid var(--border);
+      border-radius: 10px; padding: .7rem .85rem;
+      font-size: .92rem; margin-bottom: .6rem;
+      color: var(--text); background: var(--surface2); min-height: 48px;
     }
-    .login-inp:focus { outline: none; border-color: var(--teal); }
-    .login-err { font-size: .8rem; color: var(--red); margin-bottom: .45rem; display: none; }
-    .login-btn { width: 100%; background: var(--navy); color: #fff; border: none; border-radius: 8px; padding: .72rem; font-size: .93rem; font-weight: 700; cursor: pointer; }
-    .login-cancel { display: block; text-align: center; margin-top: .65rem; font-size: .82rem; color: var(--muted); cursor: pointer; }
-    .login-cancel:hover { color: var(--text); }
+    .login-inp:focus {
+      outline: none; border-color: var(--teal);
+      box-shadow: 0 0 0 3px rgba(13,148,136,.12); background: #fff;
+    }
+    .login-err { font-size: .78rem; color: var(--red); margin-bottom: .4rem; display: none; }
+    .login-btn {
+      width: 100%; background: var(--navy); color: #fff;
+      border: none; border-radius: 10px; padding: .75rem;
+      font-size: .9rem; font-weight: 700; cursor: pointer; min-height: 46px;
+    }
+    .login-btn:active { opacity: .85; }
+    .login-cancel {
+      display: block; text-align: center; margin-top: .6rem;
+      font-size: .8rem; color: var(--muted); cursor: pointer; padding: .5rem;
+    }
 
     /* ── Admin Panel ── */
     .admin-overlay {
-      display: none; position: fixed; inset: 0; background: rgba(0,0,0,.55);
-      z-index: 400; overflow-y: auto; align-items: flex-start; justify-content: center;
+      display: none; position: fixed; inset: 0;
+      background: rgba(0,0,0,.5); z-index: 400;
+      overflow-y: auto; align-items: flex-start; justify-content: center;
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
     }
     .admin-overlay.open { display: flex; }
     .admin-panel {
       background: var(--surface); border-radius: var(--r);
-      width: 100%; max-width: 700px; margin: 1rem; box-shadow: var(--sh-lg);
+      width: 100%; max-width: 680px; margin: 1rem;
+      box-shadow: var(--sh-lg);
     }
     .admin-hdr {
-      background: var(--navy); color: #fff; padding: 1.1rem 1.25rem;
-      border-radius: var(--r) var(--r) 0 0;
+      background: var(--navy); color: #fff;
+      padding: 1rem 1.1rem; border-radius: var(--r) var(--r) 0 0;
       display: flex; align-items: center; justify-content: space-between;
     }
-    .admin-hdr-title { font-size: .98rem; font-weight: 700; }
+    .admin-hdr-title { font-size: .92rem; font-weight: 700; }
     .admin-close {
-      background: rgba(255,255,255,.18); border: none; border-radius: 50%;
-      width: 30px; height: 30px; color: #fff; cursor: pointer; font-size: 1rem;
+      background: rgba(255,255,255,.15); border: none; border-radius: 50%;
+      width: 30px; height: 30px; color: #fff; cursor: pointer; font-size: .9rem;
       display: flex; align-items: center; justify-content: center;
     }
-    .admin-body { padding: 1.1rem; }
-    .admin-shift-tabs { display: flex; gap: .45rem; margin-bottom: 1rem; flex-wrap: wrap; }
+    .admin-body { padding: 1rem; }
+    .admin-shift-tabs { display: flex; gap: .35rem; margin-bottom: 1rem; }
     .admin-tab {
-      padding: .38rem .85rem; border-radius: 20px; border: 1.5px solid var(--border);
-      background: var(--surface); cursor: pointer; font-size: .8rem; font-weight: 600;
-      color: var(--muted); transition: all .14s;
+      padding: .35rem .8rem; border-radius: 20px;
+      border: 1.5px solid var(--border); background: var(--surface2);
+      cursor: pointer; font-size: .78rem; font-weight: 600;
+      color: var(--muted); transition: all .14s; min-height: 34px;
     }
     .admin-tab.active { background: var(--teal); border-color: var(--teal); color: #fff; }
-    .admin-sec-group { margin-bottom: 1.2rem; }
+    .admin-sec-group { margin-bottom: 1.1rem; }
     .admin-sec-group h4 {
-      font-size: .75rem; font-weight: 700; text-transform: uppercase; letter-spacing: .06em;
-      color: var(--navy); padding: .35rem 0; border-bottom: 1px solid var(--border); margin-bottom: .55rem;
+      font-size: .68rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: .09em; color: var(--muted);
+      padding: .3rem 0; border-bottom: 1px solid var(--border); margin-bottom: .5rem;
     }
-    .admin-row { display: flex; align-items: center; gap: .45rem; padding: .38rem 0; border-bottom: 1px dashed var(--border); }
+    .admin-row {
+      display: flex; align-items: center; gap: .4rem;
+      padding: .35rem 0; border-bottom: 1px dashed var(--border);
+    }
     .admin-row:last-child { border-bottom: none; }
-    .admin-row-text { flex: 1; font-size: .83rem; color: var(--text); }
-    .admin-edit-inp { flex: 1; border: 1.5px solid var(--teal); border-radius: 6px; padding: .28rem .55rem; font-size: .83rem; }
+    .admin-row-text { flex: 1; font-size: .82rem; }
+    .admin-edit-inp { flex: 1; border: 1.5px solid var(--teal); border-radius: 7px; padding: .28rem .52rem; font-size: .82rem; }
     .admin-edit-inp:focus { outline: none; }
-    .ab { padding: .22rem .55rem; border-radius: 6px; border: none; cursor: pointer; font-size: .72rem; font-weight: 600; transition: opacity .14s; }
-    .ab:hover { opacity: .82; }
+    .ab {
+      padding: .2rem .5rem; border-radius: 6px; border: none;
+      cursor: pointer; font-size: .7rem; font-weight: 600;
+      transition: opacity .14s; min-height: 28px;
+    }
+    .ab:active { opacity: .72; }
     .ab-edit   { background: var(--bg); color: var(--navy); }
     .ab-save   { background: var(--teal); color: #fff; }
-    .ab-del    { background: var(--bg); color: var(--red); }
+    .ab-del    { background: #fee2e2; color: var(--red); }
     .ab-cancel { background: var(--bg); color: var(--muted); }
-    .wed-toggle { font-size: .68rem; color: var(--amber); background: rgba(217,119,6,.1); border: 1px solid var(--amber); border-radius: 4px; padding: .08rem .38rem; cursor: pointer; font-weight: 700; white-space: nowrap; }
-    .admin-add-row { display: flex; gap: .45rem; margin-top: .7rem; }
+    .wed-toggle {
+      font-size: .64rem; color: var(--amber);
+      background: var(--amber-lt);
+      border: 1px solid rgba(217,119,6,.28);
+      border-radius: 5px; padding: .07rem .34rem;
+      cursor: pointer; font-weight: 700; white-space: nowrap;
+    }
+    .admin-add-row { display: flex; gap: .4rem; margin-top: .6rem; }
     .admin-add-inp {
       flex: 1; border: 1.5px solid var(--border); border-radius: 8px;
-      padding: .48rem .7rem; font-size: .83rem; color: var(--text);
+      padding: .44rem .65rem; font-size: .82rem; color: var(--text);
+      background: var(--surface2);
     }
     .admin-add-inp:focus { outline: none; border-color: var(--teal); }
-    .admin-add-btn { background: var(--teal); color: #fff; border: none; border-radius: 8px; padding: .48rem .9rem; cursor: pointer; font-size: .83rem; font-weight: 600; }
-
-    /* ── Toast ── */
-    .toast {
-      position: fixed; bottom: 1.4rem; left: 50%;
-      transform: translateX(-50%) translateY(80px);
-      background: var(--navy); color: #fff; border-radius: 28px;
-      padding: .65rem 1.4rem; font-size: .88rem; font-weight: 600;
-      z-index: 999; transition: transform .28s; pointer-events: none; white-space: nowrap;
+    .admin-add-btn {
+      background: var(--teal); color: #fff; border: none;
+      border-radius: 8px; padding: .44rem .85rem;
+      cursor: pointer; font-size: .82rem; font-weight: 600; min-height: 38px;
     }
-    .toast.show { transform: translateX(-50%) translateY(0); }
+
+    /* ── Save Bubble ── */
+    .save-bubble {
+      position: fixed;
+      bottom: calc(1.25rem + env(safe-area-inset-bottom));
+      left: 50%;
+      transform: translateX(-50%) translateY(calc(100% + 2rem));
+      background: rgba(5,150,105,.96);
+      color: #fff;
+      border-radius: 30px;
+      padding: .5rem 1.05rem;
+      font-size: .8rem; font-weight: 700;
+      z-index: 997;
+      display: flex; align-items: center; gap: .38rem;
+      pointer-events: none; white-space: nowrap;
+      box-shadow: 0 4px 20px rgba(5,150,105,.32);
+      transition: transform .26s cubic-bezier(.34,1.56,.64,1), opacity .2s;
+      opacity: 0;
+      will-change: transform, opacity;
+    }
+    .save-bubble.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+    .save-dot { width: 7px; height: 7px; background: rgba(255,255,255,.75); border-radius: 50%; flex-shrink: 0; }
+
+    /* ── Toast (alerts) ── */
+    .toast {
+      position: fixed;
+      bottom: calc(4.5rem + env(safe-area-inset-bottom));
+      left: 50%;
+      transform: translateX(-50%) translateY(10px);
+      background: var(--navy);
+      color: #fff; border-radius: 24px;
+      padding: .58rem 1.2rem;
+      font-size: .83rem; font-weight: 600;
+      z-index: 998; pointer-events: none; white-space: nowrap;
+      box-shadow: 0 4px 20px rgba(0,0,0,.22);
+      opacity: 0;
+      transition: opacity .22s, transform .22s;
+    }
+    .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
     /* ── Locked state ── */
     .locked .cb, .locked .att-btn, .locked .add-fu-btn,
     .locked .add-task-inp, .locked .notes-area textarea,
-    .locked .fu-input, .locked .restock-notes textarea { pointer-events: none; opacity: .68; }
+    .locked .fu-input, .locked .restock-notes textarea { pointer-events: none; opacity: .6; }
 
     /* ── Responsive ── */
     @media (max-width: 480px) {
       .staff-fields { grid-template-columns: 1fr; }
       .sum-meta { grid-template-columns: 1fr 1fr; }
-      .fu-table { font-size: .76rem; }
-      .fu-table th, .fu-table td { padding: .28rem; }
+      .main { padding-left: .7rem; padding-right: .7rem; }
+      .fu-table { font-size: .75rem; }
+      .fu-table th, .fu-table td { padding: .25rem .28rem; }
     }
   </style>
 </head>
@@ -359,15 +658,15 @@
 <header class="app-header">
   <div class="header-inner">
     <div class="logo">
-      <div class="logo-icon">⚡</div>
+      <div class="logo-bolt">⚡</div>
       <div>
         <div class="logo-name">ShiftStorm</div>
-        <div class="logo-org">Foundation2</div>
+        <div class="logo-sub">Foundation2</div>
       </div>
     </div>
     <div class="hdr-btns">
       <button class="hdr-btn" onclick="openAdmin()">⚙ Admin</button>
-      <button class="hdr-btn" onclick="showSummary()">📋 View</button>
+      <button class="hdr-btn" onclick="showSummary()">📋 Summary</button>
     </div>
   </div>
 </header>
@@ -383,11 +682,12 @@
 
   <!-- Staff Info -->
   <div class="staff-card">
-    <h3>Shift Information</h3>
+    <div class="card-label">Shift Information</div>
     <div class="staff-fields">
       <div class="fld">
         <label>Staff Initials</label>
-        <input type="text" id="staffInitials" placeholder="e.g. JD" maxlength="6" autocomplete="off" spellcheck="false">
+        <input type="text" id="staffInitials" placeholder="e.g. JD" maxlength="6"
+               autocomplete="off" spellcheck="false" autocapitalize="characters">
       </div>
       <div class="fld">
         <label>Date</label>
@@ -399,14 +699,17 @@
   <!-- Shift Tabs -->
   <div class="shift-tabs">
     <div class="shift-tab active" id="tab-1st" onclick="selectShift('1st')">
+      <div class="st-emoji">🌅</div>
       <div class="st-label">1st Shift</div>
       <div class="st-due">Due 3:00 PM</div>
     </div>
     <div class="shift-tab" id="tab-2nd" onclick="selectShift('2nd')">
+      <div class="st-emoji">🌆</div>
       <div class="st-label">2nd Shift</div>
       <div class="st-due">Due 11:00 PM</div>
     </div>
     <div class="shift-tab" id="tab-3rd" onclick="selectShift('3rd')">
+      <div class="st-emoji">🌙</div>
       <div class="st-label">3rd Shift</div>
       <div class="st-due">Due 7:00 AM</div>
     </div>
@@ -417,27 +720,33 @@
 
     <div class="sec-card">
       <div class="sec-hdr" onclick="toggleSec(this)">
-        <div class="sec-title"><div class="sec-icon">🌅</div>Start of Shift</div>
+        <div class="sec-icon-wrap">🌅</div>
+        <div class="sec-title-text">Start of Shift</div>
         <span class="sec-prog" id="prog-1st-start">0/0</span>
+        <span class="chevron">▼</span>
       </div>
+      <div class="sec-divider"></div>
       <div class="sec-body" id="tasks-1st-start"></div>
     </div>
 
     <div class="sec-card">
       <div class="sec-hdr" onclick="toggleSec(this)">
-        <div class="sec-title"><div class="sec-icon">👥</div>Client Follow-Ups</div>
+        <div class="sec-icon-wrap">👥</div>
+        <div class="sec-title-text">Client Follow-Ups</div>
         <span class="sec-prog" id="prog-1st-followups">0 clients</span>
+        <span class="chevron">▼</span>
       </div>
+      <div class="sec-divider"></div>
       <div class="sec-body">
         <div class="fu-wrap">
           <table class="fu-table">
             <thead>
               <tr>
-                <th style="min-width:64px">Client</th>
-                <th style="min-width:60px">Staff</th>
+                <th style="min-width:62px">Client</th>
+                <th style="min-width:58px">Staff</th>
                 <th>Notes</th>
-                <th style="text-align:center;min-width:44px">Att 1</th>
-                <th style="text-align:center;min-width:44px">Att 2</th>
+                <th style="text-align:center;min-width:40px">Att 1</th>
+                <th style="text-align:center;min-width:40px">Att 2</th>
                 <th style="width:28px"></th>
               </tr>
             </thead>
@@ -450,16 +759,22 @@
 
     <div class="sec-card">
       <div class="sec-hdr" onclick="toggleSec(this)">
-        <div class="sec-title"><div class="sec-icon">🧹</div>Clean & Reset</div>
+        <div class="sec-icon-wrap">🧹</div>
+        <div class="sec-title-text">Clean &amp; Reset</div>
         <span class="sec-prog" id="prog-1st-clean">0/0</span>
+        <span class="chevron">▼</span>
       </div>
+      <div class="sec-divider"></div>
       <div class="sec-body" id="tasks-1st-clean"></div>
     </div>
 
     <div class="sec-card">
       <div class="sec-hdr" onclick="toggleSec(this)">
-        <div class="sec-title"><div class="sec-icon">📝</div>Additional Tasks</div>
+        <div class="sec-icon-wrap">📝</div>
+        <div class="sec-title-text">Additional Tasks</div>
+        <span class="chevron">▼</span>
       </div>
+      <div class="sec-divider"></div>
       <div class="sec-body" id="add-1st">
         <div class="add-task-row">
           <div class="cb" onclick="toggleAdd(this)" data-shift="1st" data-idx="0"></div>
@@ -474,9 +789,13 @@
 
     <div class="sec-card">
       <div class="sec-hdr no-toggle">
-        <div class="sec-title"><div class="sec-icon">📢</div>Shift Notes for Leadership</div>
+        <div class="sec-icon-wrap">📢</div>
+        <div class="sec-title-text">Notes for Leadership</div>
       </div>
-      <div class="notes-area"><textarea id="notes-1st" placeholder="Notes for leadership…" oninput="state.notes['1st']=this.value;save()"></textarea></div>
+      <div class="sec-divider"></div>
+      <div class="notes-area">
+        <textarea id="notes-1st" placeholder="Notes for leadership…" oninput="state.notes['1st']=this.value;save()"></textarea>
+      </div>
     </div>
 
   </div><!-- /1st -->
@@ -486,27 +805,35 @@
 
     <div class="sec-card">
       <div class="sec-hdr" onclick="toggleSec(this)">
-        <div class="sec-title"><div class="sec-icon">🌆</div>Start of Shift</div>
+        <div class="sec-icon-wrap">🌆</div>
+        <div class="sec-title-text">Start of Shift</div>
         <span class="sec-prog" id="prog-2nd-start">0/0</span>
+        <span class="chevron">▼</span>
       </div>
+      <div class="sec-divider"></div>
       <div class="sec-body" id="tasks-2nd-start"></div>
     </div>
 
     <div class="sec-card">
       <div class="sec-hdr" onclick="toggleSec(this)">
-        <div class="sec-title"><div class="sec-icon">🧹</div>Clean & Reset</div>
+        <div class="sec-icon-wrap">🧹</div>
+        <div class="sec-title-text">Clean &amp; Reset</div>
         <span class="sec-prog" id="prog-2nd-clean">0/0</span>
+        <span class="chevron">▼</span>
       </div>
+      <div class="sec-divider"></div>
       <div class="sec-body" id="tasks-2nd-clean"></div>
     </div>
 
     <div class="sec-card">
       <div class="sec-hdr" onclick="toggleSec(this)">
-        <div class="sec-title"><div class="sec-icon">📦</div>Restocking</div>
+        <div class="sec-icon-wrap">📦</div>
+        <div class="sec-title-text">Restocking</div>
         <span class="sec-prog" id="prog-2nd-restock">0/0</span>
+        <span class="chevron">▼</span>
       </div>
+      <div class="sec-divider"></div>
       <div class="sec-body" id="tasks-2nd-restock">
-        <!-- Tasks injected here, notes below -->
         <div class="restock-notes" id="restock-notes-wrap">
           <label>Items Needed (anything to order or restock):</label>
           <textarea id="restock-items" placeholder="e.g. Kleenex, fidget spinners…" oninput="state.restockItems=this.value;save()"></textarea>
@@ -516,8 +843,11 @@
 
     <div class="sec-card">
       <div class="sec-hdr" onclick="toggleSec(this)">
-        <div class="sec-title"><div class="sec-icon">📝</div>Additional Tasks</div>
+        <div class="sec-icon-wrap">📝</div>
+        <div class="sec-title-text">Additional Tasks</div>
+        <span class="chevron">▼</span>
       </div>
+      <div class="sec-divider"></div>
       <div class="sec-body" id="add-2nd">
         <div class="add-task-row">
           <div class="cb" onclick="toggleAdd(this)" data-shift="2nd" data-idx="0"></div>
@@ -532,9 +862,13 @@
 
     <div class="sec-card">
       <div class="sec-hdr no-toggle">
-        <div class="sec-title"><div class="sec-icon">📢</div>Shift Notes for Leadership</div>
+        <div class="sec-icon-wrap">📢</div>
+        <div class="sec-title-text">Notes for Leadership</div>
       </div>
-      <div class="notes-area"><textarea id="notes-2nd" placeholder="Notes for leadership…" oninput="state.notes['2nd']=this.value;save()"></textarea></div>
+      <div class="sec-divider"></div>
+      <div class="notes-area">
+        <textarea id="notes-2nd" placeholder="Notes for leadership…" oninput="state.notes['2nd']=this.value;save()"></textarea>
+      </div>
     </div>
 
   </div><!-- /2nd -->
@@ -544,56 +878,77 @@
 
     <div class="sec-card">
       <div class="sec-hdr" onclick="toggleSec(this)">
-        <div class="sec-title"><div class="sec-icon">🌙</div>Start of Shift</div>
+        <div class="sec-icon-wrap">🌙</div>
+        <div class="sec-title-text">Start of Shift</div>
         <span class="sec-prog" id="prog-3rd-start">0/0</span>
+        <span class="chevron">▼</span>
       </div>
+      <div class="sec-divider"></div>
       <div class="sec-body" id="tasks-3rd-start"></div>
     </div>
 
     <div class="sec-card">
       <div class="sec-hdr" onclick="toggleSec(this)">
-        <div class="sec-title"><div class="sec-icon">🧽</div>Cleaning & Sanitizing</div>
+        <div class="sec-icon-wrap">🧽</div>
+        <div class="sec-title-text">Cleaning &amp; Sanitizing</div>
         <span class="sec-prog" id="prog-3rd-clean">0/0</span>
+        <span class="chevron">▼</span>
       </div>
+      <div class="sec-divider"></div>
       <div class="sec-body" id="tasks-3rd-clean"></div>
     </div>
 
     <div class="sec-card">
       <div class="sec-hdr" onclick="toggleSec(this)">
-        <div class="sec-title"><div class="sec-icon">🗂️</div>Organization & Reset</div>
+        <div class="sec-icon-wrap">🗂️</div>
+        <div class="sec-title-text">Organization &amp; Reset</div>
         <span class="sec-prog" id="prog-3rd-org">0/0</span>
+        <span class="chevron">▼</span>
       </div>
+      <div class="sec-divider"></div>
       <div class="sec-body" id="tasks-3rd-org"></div>
     </div>
 
     <div class="sec-card">
       <div class="sec-hdr" onclick="toggleSec(this)">
-        <div class="sec-title"><div class="sec-icon">🔐</div>Lockbox & Resources</div>
+        <div class="sec-icon-wrap">🔐</div>
+        <div class="sec-title-text">Lockbox &amp; Resources</div>
         <span class="sec-prog" id="prog-3rd-lockbox">0/0</span>
+        <span class="chevron">▼</span>
       </div>
+      <div class="sec-divider"></div>
       <div class="sec-body" id="tasks-3rd-lockbox"></div>
     </div>
 
     <div class="sec-card">
       <div class="sec-hdr" onclick="toggleSec(this)">
-        <div class="sec-title"><div class="sec-icon">💻</div>Technology</div>
+        <div class="sec-icon-wrap">💻</div>
+        <div class="sec-title-text">Technology</div>
         <span class="sec-prog" id="prog-3rd-tech">0/0</span>
+        <span class="chevron">▼</span>
       </div>
+      <div class="sec-divider"></div>
       <div class="sec-body" id="tasks-3rd-tech"></div>
     </div>
 
     <div class="sec-card">
       <div class="sec-hdr" onclick="toggleSec(this)">
-        <div class="sec-title"><div class="sec-icon">🚪</div>End of Shift</div>
+        <div class="sec-icon-wrap">🚪</div>
+        <div class="sec-title-text">End of Shift</div>
         <span class="sec-prog" id="prog-3rd-end">0/0</span>
+        <span class="chevron">▼</span>
       </div>
+      <div class="sec-divider"></div>
       <div class="sec-body" id="tasks-3rd-end"></div>
     </div>
 
     <div class="sec-card">
       <div class="sec-hdr" onclick="toggleSec(this)">
-        <div class="sec-title"><div class="sec-icon">📝</div>Additional Tasks</div>
+        <div class="sec-icon-wrap">📝</div>
+        <div class="sec-title-text">Additional Tasks</div>
+        <span class="chevron">▼</span>
       </div>
+      <div class="sec-divider"></div>
       <div class="sec-body" id="add-3rd">
         <div class="add-task-row">
           <div class="cb" onclick="toggleAdd(this)" data-shift="3rd" data-idx="0"></div>
@@ -608,26 +963,33 @@
 
     <div class="sec-card">
       <div class="sec-hdr no-toggle">
-        <div class="sec-title"><div class="sec-icon">📢</div>Shift Notes for Leadership</div>
+        <div class="sec-icon-wrap">📢</div>
+        <div class="sec-title-text">Notes for Leadership</div>
       </div>
-      <div class="notes-area"><textarea id="notes-3rd" placeholder="Notes for leadership…" oninput="state.notes['3rd']=this.value;save()"></textarea></div>
+      <div class="sec-divider"></div>
+      <div class="notes-area">
+        <textarea id="notes-3rd" placeholder="Notes for leadership…" oninput="state.notes['3rd']=this.value;save()"></textarea>
+      </div>
     </div>
 
   </div><!-- /3rd -->
 
   <!-- Submit -->
   <div class="submit-row">
-    <button class="submit-btn" id="submitBtn" onclick="submitShift()">✓ Submit &amp; Lock Shift</button>
+    <button class="submit-btn" id="submitBtn" onclick="submitShift()">
+      <span>✓</span> Submit &amp; Lock Shift
+    </button>
     <button class="reset-link" onclick="resetForm()">Reset / Start New Shift</button>
   </div>
 
-</main><!-- /main -->
+</main>
 
 <!-- ═══ SUMMARY MODAL ═══ -->
 <div class="overlay" id="summaryOverlay">
   <div class="modal">
+    <div class="modal-drag"></div>
     <div class="modal-hdr">
-      <div class="modal-title">📋 Shift Summary</div>
+      <div class="modal-title">Shift Summary</div>
       <button class="modal-close" onclick="closeSummary()">✕</button>
     </div>
     <div id="summaryContent"></div>
@@ -637,7 +999,7 @@
 <!-- ═══ ADMIN LOGIN ═══ -->
 <div class="login-overlay" id="loginOverlay">
   <div class="login-card">
-    <div class="login-title">🔐 Admin Access</div>
+    <div class="login-title">Admin Access</div>
     <div class="login-subtitle">Enter the admin password to manage tasks.</div>
     <input type="password" class="login-inp" id="adminPw" placeholder="Password"
            onkeydown="if(event.key==='Enter')doLogin()">
@@ -651,7 +1013,7 @@
 <div class="admin-overlay" id="adminOverlay">
   <div class="admin-panel">
     <div class="admin-hdr">
-      <div class="admin-hdr-title">⚙ Admin — Task Manager</div>
+      <div class="admin-hdr-title">⚙ Task Manager</div>
       <button class="admin-close" onclick="closeAdmin()">✕</button>
     </div>
     <div class="admin-body">
@@ -665,6 +1027,12 @@
   </div>
 </div>
 
+<!-- ═══ SAVE BUBBLE ═══ -->
+<div class="save-bubble" id="saveBubble">
+  <div class="save-dot"></div>
+  Saved
+</div>
+
 <!-- ═══ TOAST ═══ -->
 <div class="toast" id="toast"></div>
 
@@ -675,14 +1043,14 @@
 const DEFAULTS = {
   '1st': {
     start: [
-      { id: 'lights',  text: 'Turn on triage lights',   wednesday: false },
-      { id: 'binder',  text: 'Binder check',             wednesday: false },
-      { id: 'vocera',  text: 'Login to Vocera',          wednesday: false },
-      { id: 'email',   text: 'Check emails',             wednesday: false },
+      { id: 'lights',   text: 'Turn on triage lights',   wednesday: false },
+      { id: 'binder',   text: 'Binder check',             wednesday: false },
+      { id: 'vocera',   text: 'Login to Vocera',          wednesday: false },
+      { id: 'email',    text: 'Check emails',             wednesday: false },
     ],
     clean: [
-      { id: 'tri-san', text: 'Sanitize triage rooms',   wednesday: false },
-      { id: 'fish-wipe',text:'Wipe fishbowl counters',  wednesday: false },
+      { id: 'tri-san',  text: 'Sanitize triage rooms',   wednesday: false },
+      { id: 'fish-wipe',text: 'Wipe fishbowl counters',  wednesday: false },
     ],
   },
   '2nd': {
@@ -692,16 +1060,16 @@ const DEFAULTS = {
       { id: 'email',     text: 'Check emails',           wednesday: false },
     ],
     clean: [
-      { id: 'tri-san',   text: 'Sanitize triage rooms',              wednesday: false },
-      { id: 'vacuum',    text: 'Vacuum lobby, fishbowl & hallway',   wednesday: false },
-      { id: 'swiffer',   text: 'Swiffer for salt',                   wednesday: false },
-      { id: 'fish-wipe', text: 'Wipe fishbowl counters',             wednesday: false },
+      { id: 'tri-san',   text: 'Sanitize triage rooms',             wednesday: false },
+      { id: 'vacuum',    text: 'Vacuum lobby, fishbowl & hallway',  wednesday: false },
+      { id: 'swiffer',   text: 'Swiffer for salt',                  wednesday: false },
+      { id: 'fish-wipe', text: 'Wipe fishbowl counters',            wednesday: false },
     ],
     restock: [
-      { id: 'tissues', text: 'Restock triage tissues',              wednesday: false },
-      { id: 'fidget',  text: 'Restock triage fidget toys',          wednesday: false },
-      { id: 'reswall', text: 'Check resource wall & copies',        wednesday: false },
-      { id: 'vending', text: 'Restock vending machine',             wednesday: false },
+      { id: 'tissues', text: 'Restock triage tissues',         wednesday: false },
+      { id: 'fidget',  text: 'Restock triage fidget toys',     wednesday: false },
+      { id: 'reswall', text: 'Check resource wall & copies',   wednesday: false },
+      { id: 'vending', text: 'Restock vending machine',        wednesday: false },
     ],
   },
   '3rd': {
@@ -711,41 +1079,40 @@ const DEFAULTS = {
       { id: 'carelogic', text: 'Check Carelogic alerts', wednesday: false },
     ],
     clean: [
-      { id: 'fish-wipe', text: 'Wipe fishbowl counters',                    wednesday: false },
-      { id: 'tri-furn',  text: 'Wipe triage furniture — Lysol + Pledge',    wednesday: false },
-      { id: 'wait-furn', text: 'Wipe waiting room furniture',               wednesday: false },
-      { id: 'switches',  text: 'Wipe light switches & door handles',        wednesday: false },
-      { id: 'coffee',    text: 'Wipe coffee machine & fill water',          wednesday: false },
-      { id: 'closet',    text: 'Wipe closet shelves',                       wednesday: false },
+      { id: 'fish-wipe', text: 'Wipe fishbowl counters',                 wednesday: false },
+      { id: 'tri-furn',  text: 'Wipe triage furniture — Lysol + Pledge', wednesday: false },
+      { id: 'wait-furn', text: 'Wipe waiting room furniture',            wednesday: false },
+      { id: 'switches',  text: 'Wipe light switches & door handles',     wednesday: false },
+      { id: 'coffee',    text: 'Wipe coffee machine & fill water',       wednesday: false },
+      { id: 'closet',    text: 'Wipe closet shelves',                    wednesday: false },
     ],
     org: [
-      { id: 'lockers',  text: 'Reset lockers — note if not empty',  wednesday: false },
-      { id: 'sweep',    text: 'Sweep/vacuum triage rooms',           wednesday: false },
-      { id: 'storage',  text: 'Clean storage room',                  wednesday: false },
+      { id: 'lockers', text: 'Reset lockers — note if not empty', wednesday: false },
+      { id: 'sweep',   text: 'Sweep/vacuum triage rooms',         wednesday: false },
+      { id: 'storage', text: 'Clean storage room',                wednesday: false },
     ],
     lockbox: [
-      { id: 'fill',    text: 'Fill lockbox & update inventory sheet',       wednesday: false },
-      { id: 'bus',     text: 'Check bus tickets — note if under 5',        wednesday: false },
-      { id: 'hacap',   text: 'Check HACAP boxes — note if 2 or less',     wednesday: false },
+      { id: 'fill',  text: 'Fill lockbox & update inventory sheet',  wednesday: false },
+      { id: 'bus',   text: 'Check bus tickets — note if under 5',   wednesday: false },
+      { id: 'hacap', text: 'Check HACAP boxes — note if 2 or less', wednesday: false },
     ],
     tech: [
-      { id: 'charge',   text: 'Charge all laptops, iPads & phones', wednesday: false },
-      { id: 'updates',  text: 'Check laptops for updates',           wednesday: true  },
+      { id: 'charge',  text: 'Charge all laptops, iPads & phones', wednesday: false },
+      { id: 'updates', text: 'Check laptops for updates',           wednesday: true  },
     ],
     end: [
-      { id: 'trash',    text: 'Empty trash & bring to dumpster',       wednesday: false },
-      { id: 'vacuum',   text: 'Vacuum lobby, fishbowl & hallway',      wednesday: false },
-      { id: 'swiffer',  text: 'Swiffer for salt',                      wednesday: false },
-      { id: 'vocout',   text: 'Logout of Vocera',                      wednesday: false },
+      { id: 'trash',   text: 'Empty trash & bring to dumpster',  wednesday: false },
+      { id: 'vacuum',  text: 'Vacuum lobby, fishbowl & hallway', wednesday: false },
+      { id: 'swiffer', text: 'Swiffer for salt',                 wednesday: false },
+      { id: 'vocout',  text: 'Logout of Vocera',                 wednesday: false },
     ],
   },
 };
 
-// Section metadata per shift
 const SECS = {
   '1st': [
-    { key: 'start', label: 'Start of Shift',   domId: 'tasks-1st-start', progId: 'prog-1st-start' },
-    { key: 'clean', label: 'Clean & Reset',    domId: 'tasks-1st-clean', progId: 'prog-1st-clean' },
+    { key: 'start', label: 'Start of Shift', domId: 'tasks-1st-start', progId: 'prog-1st-start' },
+    { key: 'clean', label: 'Clean & Reset',  domId: 'tasks-1st-clean', progId: 'prog-1st-clean' },
   ],
   '2nd': [
     { key: 'start',   label: 'Start of Shift', domId: 'tasks-2nd-start',   progId: 'prog-2nd-start' },
@@ -753,12 +1120,12 @@ const SECS = {
     { key: 'restock', label: 'Restocking',     domId: 'tasks-2nd-restock', progId: 'prog-2nd-restock' },
   ],
   '3rd': [
-    { key: 'start',   label: 'Start of Shift',         domId: 'tasks-3rd-start',   progId: 'prog-3rd-start' },
-    { key: 'clean',   label: 'Cleaning & Sanitizing',  domId: 'tasks-3rd-clean',   progId: 'prog-3rd-clean' },
-    { key: 'org',     label: 'Organization & Reset',   domId: 'tasks-3rd-org',     progId: 'prog-3rd-org' },
-    { key: 'lockbox', label: 'Lockbox & Resources',    domId: 'tasks-3rd-lockbox', progId: 'prog-3rd-lockbox' },
-    { key: 'tech',    label: 'Technology',             domId: 'tasks-3rd-tech',    progId: 'prog-3rd-tech' },
-    { key: 'end',     label: 'End of Shift',           domId: 'tasks-3rd-end',     progId: 'prog-3rd-end' },
+    { key: 'start',   label: 'Start of Shift',        domId: 'tasks-3rd-start',   progId: 'prog-3rd-start' },
+    { key: 'clean',   label: 'Cleaning & Sanitizing', domId: 'tasks-3rd-clean',   progId: 'prog-3rd-clean' },
+    { key: 'org',     label: 'Organization & Reset',  domId: 'tasks-3rd-org',     progId: 'prog-3rd-org' },
+    { key: 'lockbox', label: 'Lockbox & Resources',   domId: 'tasks-3rd-lockbox', progId: 'prog-3rd-lockbox' },
+    { key: 'tech',    label: 'Technology',            domId: 'tasks-3rd-tech',    progId: 'prog-3rd-tech' },
+    { key: 'end',     label: 'End of Shift',          domId: 'tasks-3rd-end',     progId: 'prog-3rd-end' },
   ],
 };
 
@@ -794,7 +1161,6 @@ function tasks(shift, sec) {
   const c = state.customTasks[k];
   return (c && c.length > 0) ? c : (DEFAULTS[shift]?.[sec] || []).map(t => ({...t}));
 }
-
 function taskKey(shift, sec, id) { return `${shift}-${sec}-${id}`; }
 
 // ══════════════════════════════════════════
@@ -951,9 +1317,11 @@ function updateProg(shift, sec, progId) {
 // ══════════════════════════════════════════
 function toggleSec(hdr) {
   if (hdr.classList.contains('no-toggle')) return;
-  const body = hdr.nextElementSibling;
+  const card = hdr.closest('.sec-card');
+  const body = card?.querySelector('.sec-body');
   if (!body) return;
-  body.classList.toggle('collapsed');
+  const isNowCollapsed = body.classList.toggle('collapsed');
+  hdr.classList.toggle('collapsed-hdr', isNowCollapsed);
 }
 
 // ══════════════════════════════════════════
@@ -971,10 +1339,19 @@ function selectShift(s) {
 // ══════════════════════════════════════════
 //  SAVE / LOAD
 // ══════════════════════════════════════════
+let _saveBubbleTimer = null;
+function showSaved() {
+  const el = document.getElementById('saveBubble');
+  el.classList.add('show');
+  clearTimeout(_saveBubbleTimer);
+  _saveBubbleTimer = setTimeout(() => el.classList.remove('show'), 1400);
+}
+
 function save() {
   state.staffInitials = document.getElementById('staffInitials').value;
   state.shiftDate = document.getElementById('shiftDate').value;
   localStorage.setItem('ss_state', JSON.stringify(state));
+  showSaved();
 }
 
 function load() {
@@ -982,9 +1359,9 @@ function load() {
     const raw = localStorage.getItem('ss_state');
     if (raw) {
       const p = JSON.parse(raw);
-      // Deep merge to keep structure intact
       state = { ...DEFAULT_STATE(), ...p,
-        checks: p.checks||{}, notes: { ...DEFAULT_STATE().notes, ...p.notes },
+        checks: p.checks||{},
+        notes: { ...DEFAULT_STATE().notes, ...p.notes },
         additionals: { ...DEFAULT_STATE().additionals, ...p.additionals },
         customTasks: p.customTasks||{},
         followUps: p.followUps||[],
@@ -1037,7 +1414,7 @@ function buildSummary() {
 
   let html = `<div class="sum-meta">
     <div class="sum-meta-item"><div class="sum-meta-lbl">Staff</div><div class="sum-meta-val">${escHtml(initials)}</div></div>
-    <div class="sum-meta-item"><div class="sum-meta-lbl">Shift</div><div class="sum-meta-val">${s} Shift</div></div>
+    <div class="sum-meta-item"><div class="sum-meta-lbl">Shift</div><div class="sum-meta-val">${s}</div></div>
     <div class="sum-meta-item"><div class="sum-meta-lbl">Date</div><div class="sum-meta-val">${dateStr}</div></div>
   </div>`;
 
@@ -1055,7 +1432,6 @@ function buildSummary() {
     html += '</div>';
   });
 
-  // Follow-ups (1st shift)
   if (s === '1st' && state.followUps.length) {
     html += `<div class="sum-sec"><h4>Client Follow-Ups</h4>`;
     state.followUps.forEach(f => {
@@ -1068,7 +1444,6 @@ function buildSummary() {
     html += '</div>';
   }
 
-  // Additionals
   const adds = (state.additionals[s]||[]).filter(a => a.text.trim());
   if (adds.length) {
     html += `<div class="sum-sec"><h4>Additional Tasks</h4><ul class="sum-list">`;
@@ -1076,9 +1451,8 @@ function buildSummary() {
     html += '</ul></div>';
   }
 
-  // Notes
   const n = state.notes[s] || '';
-  if (n) html += `<div class="sum-sec"><h4>Shift Notes for Leadership</h4><div class="sum-notes">${escHtml(n)}</div></div>`;
+  if (n) html += `<div class="sum-sec"><h4>Notes for Leadership</h4><div class="sum-notes">${escHtml(n)}</div></div>`;
 
   document.getElementById('summaryContent').innerHTML = html;
 }
@@ -1093,192 +1467,131 @@ function openAdmin() {
   setTimeout(() => document.getElementById('adminPw').focus(), 80);
 }
 function closeLogin() { document.getElementById('loginOverlay').classList.remove('open'); }
+
 function doLogin() {
-  if (document.getElementById('adminPw').value === 'admin') {
+  const pw = document.getElementById('adminPw').value;
+  if (pw === 'admin') {
     closeLogin();
     document.getElementById('adminOverlay').classList.add('open');
-    renderAdmin(curAdminShift);
+    selAdminShift('1st', document.querySelector('.admin-tab'));
   } else {
     document.getElementById('loginErr').style.display = 'block';
-    document.getElementById('adminPw').value = '';
-    document.getElementById('adminPw').focus();
   }
 }
-function closeAdmin() {
-  document.getElementById('adminOverlay').classList.remove('open');
-  renderAll(); refreshAllProg();
-}
+
+function closeAdmin() { document.getElementById('adminOverlay').classList.remove('open'); }
+
 function selAdminShift(s, btn) {
   curAdminShift = s;
   document.querySelectorAll('.admin-tab').forEach(t => t.classList.remove('active'));
-  btn.classList.add('active');
-  renderAdmin(s);
+  if (btn) btn.classList.add('active');
+  renderAdmin();
 }
 
-function getCustom(k) {
-  const [shift, sec] = splitKey(k);
-  if (!state.customTasks[k]) {
-    state.customTasks[k] = (DEFAULTS[shift]?.[sec]||[]).map(t=>({...t}));
-  }
-  return state.customTasks[k];
-}
-
-function splitKey(k) {
-  // k = "1st-start" | "2nd-restock" | "3rd-lockbox" etc.
-  const i = k.indexOf('-');
-  return [k.slice(0,i), k.slice(i+1)];
-}
-
-function renderAdmin(shift) {
+function renderAdmin() {
+  const s = curAdminShift;
+  const secs = SECS[s] || [];
   let html = '';
-  SECS[shift].forEach(sec => {
-    const k = `${shift}-${sec.key}`;
-    const list = getCustom(k);
-    html += `<div class="admin-sec-group"><h4>${escHtml(sec.label)}</h4><div id="arows-${k}">`;
-    list.forEach((t,i) => { html += adminRow(k,t,i); });
+  secs.forEach(sec => {
+    const ts = tasks(s, sec.key);
+    html += `<div class="admin-sec">
+      <div class="admin-sec-hdr">${escHtml(sec.label)}</div>
+      <div class="admin-task-list">`;
+    ts.forEach((t, i) => {
+      html += `<div class="admin-task-row">
+        <input type="text" class="admin-task-inp" value="${escHtml(t.text)}"
+               oninput="editTask('${s}','${sec.key}',${i},this.value)">
+        <label class="wed-toggle"><input type="checkbox" ${t.wednesday?'checked':''}
+               onchange="editTaskWed('${s}','${sec.key}',${i},this.checked)"> Wed</label>
+        <button class="del-task-btn" onclick="delTask('${s}','${sec.key}',${i})">✕</button>
+      </div>`;
+    });
     html += `</div>
-      <div class="admin-add-row">
-        <input class="admin-add-inp" type="text" id="ainp-${k}" placeholder="New task…">
-        <button class="admin-add-btn" onclick="adminAdd('${k}')">+ Add</button>
-      </div></div>`;
+      <button class="add-task-btn" onclick="addTask('${s}','${sec.key}')">+ Add Task</button>
+    </div>`;
   });
   document.getElementById('adminContent').innerHTML = html;
 }
 
-function adminRow(k, t, i) {
-  const wedBtn = t.wednesday
-    ? `<span class="wed-toggle" onclick="adminToggleWed('${k}',${i})">WED ✓</span>`
-    : `<button class="ab ab-edit" onclick="adminToggleWed('${k}',${i})">+ WED</button>`;
-  return `<div class="admin-row" id="arow-${k}-${i}">
-    <span class="admin-row-text">${escHtml(t.text)}</span>
-    ${wedBtn}
-    <button class="ab ab-edit" onclick="adminEdit('${k}',${i})">Edit</button>
-    <button class="ab ab-del"  onclick="adminDel('${k}',${i})">Del</button>
-  </div>`;
+function getOrCreateCustom(s, sec) {
+  const k = `${s}-${sec}`;
+  if (!state.customTasks[k] || state.customTasks[k].length === 0) {
+    state.customTasks[k] = (DEFAULTS[s]?.[sec] || []).map(t => ({...t}));
+  }
+  return state.customTasks[k];
 }
 
-function adminEdit(k, i) {
-  const t = getCustom(k)[i];
-  const row = document.getElementById(`arow-${k}-${i}`);
-  row.innerHTML = `
-    <input class="admin-edit-inp" type="text" id="aedit-${k}-${i}" value="${escHtml(t.text)}">
-    <button class="ab ab-save"   onclick="adminSave('${k}',${i})">Save</button>
-    <button class="ab ab-cancel" onclick="renderAdmin(curAdminShift)">Cancel</button>`;
+function editTask(s, sec, i, val) {
+  const ts = getOrCreateCustom(s, sec);
+  if (ts[i]) ts[i].text = val;
+  save();
+  const secObj = SECS[s]?.find(x => x.key === sec);
+  if (secObj) renderSec(s, sec, secObj.domId, secObj.progId);
 }
-function adminSave(k, i) {
-  const inp = document.getElementById(`aedit-${k}-${i}`);
-  if (!inp?.value.trim()) return;
-  getCustom(k)[i].text = inp.value.trim(); save(); renderAdmin(curAdminShift);
+
+function editTaskWed(s, sec, i, val) {
+  const ts = getOrCreateCustom(s, sec);
+  if (ts[i]) ts[i].wednesday = val;
+  save();
+  const secObj = SECS[s]?.find(x => x.key === sec);
+  if (secObj) renderSec(s, sec, secObj.domId, secObj.progId);
 }
-function adminDel(k, i) {
-  getCustom(k).splice(i,1); save(); renderAdmin(curAdminShift);
+
+function delTask(s, sec, i) {
+  const ts = getOrCreateCustom(s, sec);
+  ts.splice(i, 1);
+  save();
+  renderAdmin();
+  const secObj = SECS[s]?.find(x => x.key === sec);
+  if (secObj) renderSec(s, sec, secObj.domId, secObj.progId);
 }
-function adminToggleWed(k, i) {
-  getCustom(k)[i].wednesday = !getCustom(k)[i].wednesday; save(); renderAdmin(curAdminShift);
-}
-function adminAdd(k) {
-  const inp = document.getElementById(`ainp-${k}`);
-  if (!inp?.value.trim()) return;
-  getCustom(k).push({ id:'c'+Date.now(), text:inp.value.trim(), wednesday:false });
-  inp.value=''; save(); renderAdmin(curAdminShift);
+
+function addTask(s, sec) {
+  const ts = getOrCreateCustom(s, sec);
+  ts.push({ id: 'custom-' + Date.now(), text: '', wednesday: false });
+  save();
+  renderAdmin();
 }
 
 // ══════════════════════════════════════════
 //  TOAST
 // ══════════════════════════════════════════
+let _toastTimer = null;
 function toast(msg) {
   const el = document.getElementById('toast');
-  el.textContent = msg; el.classList.add('show');
-  setTimeout(() => el.classList.remove('show'), 3000);
+  el.textContent = msg;
+  el.classList.add('show');
+  clearTimeout(_toastTimer);
+  _toastTimer = setTimeout(() => el.classList.remove('show'), 2200);
 }
 
 // ══════════════════════════════════════════
-//  UTILITY
+//  HELPERS
 // ══════════════════════════════════════════
 function escHtml(s) {
   return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 
 // ══════════════════════════════════════════
-//  EVENTS
-// ══════════════════════════════════════════
-document.getElementById('summaryOverlay').addEventListener('click', e => { if(e.target===e.currentTarget) closeSummary(); });
-document.getElementById('staffInitials').addEventListener('input', save);
-document.getElementById('shiftDate').addEventListener('change', function() {
-  const d = new Date(this.value+'T12:00:00');
-  isWed = d.getDay() === 3;
-  save(); renderAll(); refreshAllProg();
-});
-document.addEventListener('keydown', e => {
-  if (e.key==='Escape') {
-    closeSummary();
-    document.getElementById('loginOverlay').classList.remove('open');
-    document.getElementById('adminOverlay').classList.remove('open');
-  }
-});
-
-// ══════════════════════════════════════════
 //  INIT
 // ══════════════════════════════════════════
 function init() {
-  // Set today's date as default
-  const today = new Date();
-  isWed = today.getDay() === 3;
-  const todayStr = today.toISOString().split('T')[0];
-
   load();
-
-  // Set date field
-  const dateEl = document.getElementById('shiftDate');
-  dateEl.value = state.shiftDate || todayStr;
-  if (state.shiftDate) {
-    const d = new Date(state.shiftDate+'T12:00:00');
-    isWed = d.getDay() === 3;
-  }
-
-  document.getElementById('staffInitials').value = state.staffInitials || '';
-
-  // Render tasks
+  const d = state.shiftDate ? new Date(state.shiftDate + 'T12:00:00') : new Date();
+  isWed = d.getDay() === 3;
   renderAll();
   renderFu();
-
-  // Restore additionals
-  ['1st','2nd','3rd'].forEach(shift => {
-    [0,1].forEach(idx => {
-      const item = state.additionals[shift]?.[idx];
-      const inp = document.getElementById(`add-${shift}-${idx}`);
-      if (inp && item) { inp.value = item.text || ''; }
-      if (item?.checked) {
-        const cb = document.querySelector(`.cb[data-shift="${shift}"][data-idx="${idx}"]`);
-        if (cb) cb.classList.add('on');
-      }
-    });
-    const notesEl = document.getElementById(`notes-${shift}`);
-    if (notesEl) notesEl.value = state.notes[shift] || '';
-  });
-
-  const ri = document.getElementById('restock-items');
-  if (ri) ri.value = state.restockItems || '';
-
-  // Restore active shift
   selectShift(state.activeShift || '1st');
-
+  document.getElementById('staffInitials').value = state.staffInitials || '';
+  document.getElementById('shiftDate').value = state.shiftDate || '';
   if (state.submitted) lockUI();
-  refreshAllProg();
 }
 
-// ══════════════════════════════════════════
-//  SERVICE WORKER
-// ══════════════════════════════════════════
+window.addEventListener('DOMContentLoaded', init);
+
 if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/sw.js')
-      .then(r => console.log('SW:', r.scope))
-      .catch(e => console.warn('SW failed:', e));
-  });
+  navigator.serviceWorker.register('/sw.js').catch(() => {});
 }
-
-init();
 </script>
 </body>
 </html>
