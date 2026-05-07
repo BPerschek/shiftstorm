@@ -1,0 +1,489 @@
+{
+  "/ShiftStormStack": [
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "<anonymous> (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/ShiftStormStack/Custom::S3AutoDeleteObjectsCustomResourceProvider": [
+    {
+      "type": "aws:cdk:is-custom-resource-handler-customResourceProvider",
+      "data": true
+    }
+  ],
+  "/ShiftStormStack/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C": [
+    {
+      "type": "aws:cdk:is-custom-resource-handler-singleton",
+      "data": true
+    },
+    {
+      "type": "aws:cdk:is-custom-resource-handler-runtime-family",
+      "data": 2
+    }
+  ],
+  "/ShiftStormStack/SiteUrl": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "SiteUrl"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "new ShiftStormStack (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\lib\\shiftstorm-stack.js:136:9)",
+        "<anonymous> (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/ShiftStormStack/ApiUrl": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ApiUrl"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "new ShiftStormStack (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\lib\\shiftstorm-stack.js:139:9)",
+        "<anonymous> (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/ShiftStormStack/UserPoolId": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "UserPoolId"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "new ShiftStormStack (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\lib\\shiftstorm-stack.js:142:9)",
+        "<anonymous> (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/ShiftStormStack/UserPoolClientId": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "UserPoolClientId"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "new ShiftStormStack (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\lib\\shiftstorm-stack.js:145:9)",
+        "<anonymous> (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/ShiftStormStack/BootstrapVersion": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "BootstrapVersion"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib, node internals...",
+        "(no user code in 9007199254740991 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/ShiftStormStack/CheckBootstrapVersion": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CheckBootstrapVersion"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib, node internals...",
+        "(no user code in 9007199254740991 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/ShiftStormStack/ShiftSubmissions/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ShiftSubmissions68C29173"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Table2 in aws-cdk-lib...",
+        "new ShiftStormStack (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\lib\\shiftstorm-stack.js:57:29)",
+        "<anonymous> (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/ShiftStormStack/OrgSettings/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "OrgSettings65054413"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Table2 in aws-cdk-lib...",
+        "new ShiftStormStack (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\lib\\shiftstorm-stack.js:63:26)",
+        "<anonymous> (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/ShiftStormStack/UserPool/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "UserPool6BA7E5F2"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new UserPool2 in aws-cdk-lib...",
+        "new ShiftStormStack (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\lib\\shiftstorm-stack.js:69:26)",
+        "<anonymous> (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/ShiftStormStack/UserPoolClient/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "UserPoolClient2F5918F7"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new UserPoolClient2 in aws-cdk-lib...",
+        "new ShiftStormStack (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\lib\\shiftstorm-stack.js:74:32)",
+        "<anonymous> (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/ShiftStormStack/HttpApi/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "HttpApiF5A9A8A7"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new HttpApi2 in aws-cdk-lib...",
+        "new ShiftStormStack (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\lib\\shiftstorm-stack.js:83:25)",
+        "<anonymous> (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/ShiftStormStack/ApiFunction/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ApiFunctionCE271BD4"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Function2 in aws-cdk-lib...",
+        "new ShiftStormStack (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\lib\\shiftstorm-stack.js:95:23)",
+        "<anonymous> (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/ShiftStormStack/SiteBucket/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "SiteBucket397A1860"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Bucket2 in aws-cdk-lib...",
+        "new ShiftStormStack (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\lib\\shiftstorm-stack.js:113:28)",
+        "<anonymous> (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    },
+    {
+      "type": "aws:cdk:analytics:mixin",
+      "data": {
+        "mixin": "aws-cdk-lib.aws_s3.mixins.BucketAutoDeleteObjects"
+      }
+    }
+  ],
+  "/ShiftStormStack/Custom::S3AutoDeleteObjectsCustomResourceProvider/Role": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Bucket2 in aws-cdk-lib...",
+        "new ShiftStormStack (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\lib\\shiftstorm-stack.js:113:28)",
+        "<anonymous> (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/ShiftStormStack/Custom::S3AutoDeleteObjectsCustomResourceProvider/Handler": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CustomS3AutoDeleteObjectsCustomResourceProviderHandler9D90184F"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Bucket2 in aws-cdk-lib...",
+        "new ShiftStormStack (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\lib\\shiftstorm-stack.js:113:28)",
+        "<anonymous> (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/ShiftStormStack/OAI/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "OAIE1EFC67F"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new OriginAccessIdentity2 in aws-cdk-lib...",
+        "new ShiftStormStack (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\lib\\shiftstorm-stack.js:119:21)",
+        "<anonymous> (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/ShiftStormStack/Distribution/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "Distribution830FAC52"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Distribution2 in aws-cdk-lib...",
+        "new ShiftStormStack (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\lib\\shiftstorm-stack.js:121:30)",
+        "<anonymous> (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/ShiftStormStack/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C81C01536"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new BucketDeployment2 in aws-cdk-lib...",
+        "new ShiftStormStack (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\lib\\shiftstorm-stack.js:130:9)",
+        "<anonymous> (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/ShiftStormStack/HttpApi/DefaultStage/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "HttpApiDefaultStage3EEB07D6"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new HttpApi2 in aws-cdk-lib...",
+        "new ShiftStormStack (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\lib\\shiftstorm-stack.js:83:25)",
+        "<anonymous> (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/ShiftStormStack/HttpApi/ANY--{proxy+}/ProxyIntegration-Permission": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "HttpApiANYproxyProxyIntegrationPermission43D4390F"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\node_modules\\aws-cdk-lib\\aws-apigatewayv2\\lib\\http\\api.js:1:96 in aws-cdk-lib...",
+        "Array.map (:)",
+        "...WrappedClass.<anonymous> in aws-cdk-lib...",
+        "new ShiftStormStack (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\lib\\shiftstorm-stack.js:107:17)",
+        "<anonymous> (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/ShiftStormStack/HttpApi/ANY--{proxy+}/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "HttpApiANYproxy435A1FB9"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\node_modules\\aws-cdk-lib\\aws-apigatewayv2\\lib\\http\\api.js:1:96 in aws-cdk-lib...",
+        "Array.map (:)",
+        "...WrappedClass.<anonymous> in aws-cdk-lib...",
+        "new ShiftStormStack (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\lib\\shiftstorm-stack.js:107:17)",
+        "<anonymous> (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/ShiftStormStack/ApiFunction/ServiceRole/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ApiFunctionServiceRole52B9747B"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Function2 in aws-cdk-lib...",
+        "new ShiftStormStack (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\lib\\shiftstorm-stack.js:95:23)",
+        "<anonymous> (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/ShiftStormStack/SiteBucket/Policy/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "SiteBucketPolicy3AC1D0F8"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Bucket2 in aws-cdk-lib...",
+        "new ShiftStormStack (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\lib\\shiftstorm-stack.js:113:28)",
+        "<anonymous> (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    },
+    {
+      "type": "aws:cdk:analytics:mixin",
+      "data": {
+        "mixin": "aws-cdk-lib.aws_s3.mixins.BucketPolicyStatements"
+      }
+    }
+  ],
+  "/ShiftStormStack/SiteBucket/AutoDeleteObjectsCustomResource/Default": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "SiteBucketAutoDeleteObjectsCustomResource9585E968"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Bucket2 in aws-cdk-lib...",
+        "new ShiftStormStack (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\lib\\shiftstorm-stack.js:113:28)",
+        "<anonymous> (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/ShiftStormStack/DeploySite/AwsCliLayer/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "DeploySiteAwsCliLayer88B0EBE2"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new BucketDeployment2 in aws-cdk-lib...",
+        "new ShiftStormStack (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\lib\\shiftstorm-stack.js:130:9)",
+        "<anonymous> (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/ShiftStormStack/DeploySite/CustomResource/Default": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "DeploySiteCustomResourceE47C9748"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new BucketDeployment2 in aws-cdk-lib...",
+        "new ShiftStormStack (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\lib\\shiftstorm-stack.js:130:9)",
+        "<anonymous> (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/ShiftStormStack/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C/ServiceRole/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756CServiceRole89A01265"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new BucketDeployment2 in aws-cdk-lib...",
+        "new ShiftStormStack (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\lib\\shiftstorm-stack.js:130:9)",
+        "<anonymous> (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/ShiftStormStack/HttpApi/ANY--{proxy+}/ProxyIntegration/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "HttpApiANYproxyProxyIntegration81A544D4"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\node_modules\\aws-cdk-lib\\aws-apigatewayv2\\lib\\http\\api.js:1:96 in aws-cdk-lib...",
+        "Array.map (:)",
+        "...WrappedClass.<anonymous> in aws-cdk-lib...",
+        "new ShiftStormStack (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\lib\\shiftstorm-stack.js:107:17)",
+        "<anonymous> (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/ShiftStormStack/ApiFunction/ServiceRole/DefaultPolicy/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ApiFunctionServiceRoleDefaultPolicy20A32B8D"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.grantReadWriteData in aws-cdk-lib...",
+        "new ShiftStormStack (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\lib\\shiftstorm-stack.js:105:21)",
+        "<anonymous> (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/ShiftStormStack/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C/ServiceRole/DefaultPolicy/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756CServiceRoleDefaultPolicy88902FDF"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\node_modules\\aws-cdk-lib\\aws-s3-deployment\\lib\\bucket-deployment.js:1:71 in aws-cdk-lib...",
+        "Array.map (:)",
+        "...new BucketDeployment2 in aws-cdk-lib...",
+        "new ShiftStormStack (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\lib\\shiftstorm-stack.js:130:9)",
+        "<anonymous> (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ]
+}

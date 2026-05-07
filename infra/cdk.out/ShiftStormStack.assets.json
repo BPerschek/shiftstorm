@@ -1,0 +1,96 @@
+{
+  "version": "53.0.0",
+  "files": {
+    "8eb6177fbf7d8bebe9b2ba5ad11dc84f602c14e5c0411e76f72a743d209bd18d": {
+      "displayName": "ApiFunction/Code",
+      "source": {
+        "path": "asset.8eb6177fbf7d8bebe9b2ba5ad11dc84f602c14e5c0411e76f72a743d209bd18d",
+        "packaging": "zip"
+      },
+      "destinations": {
+        "current_account-Default region: us-east-2-7b2ca043": {
+          "bucketName": "cdk-hnb659fds-assets-${AWS::AccountId}-Default region: us-east-2",
+          "objectKey": "8eb6177fbf7d8bebe9b2ba5ad11dc84f602c14e5c0411e76f72a743d209bd18d.zip",
+          "region": "Default region: us-east-2",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-file-publishing-role-${AWS::AccountId}-Default region: us-east-2"
+        }
+      }
+    },
+    "faa95a81ae7d7373f3e1f242268f904eb748d8d0fdd306e8a6fe515a1905a7d6": {
+      "displayName": "ShiftStormStack/Custom::S3AutoDeleteObjectsCustomResourceProvider Code",
+      "source": {
+        "path": "asset.faa95a81ae7d7373f3e1f242268f904eb748d8d0fdd306e8a6fe515a1905a7d6",
+        "packaging": "zip"
+      },
+      "destinations": {
+        "current_account-Default region: us-east-2-4040c7ec": {
+          "bucketName": "cdk-hnb659fds-assets-${AWS::AccountId}-Default region: us-east-2",
+          "objectKey": "faa95a81ae7d7373f3e1f242268f904eb748d8d0fdd306e8a6fe515a1905a7d6.zip",
+          "region": "Default region: us-east-2",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-file-publishing-role-${AWS::AccountId}-Default region: us-east-2"
+        }
+      }
+    },
+    "e2659170a0721541efa761a8d5d04d5e36cbbf691c4b15a9053002b7c825055d": {
+      "displayName": "DeploySite/AwsCliLayer/Code",
+      "source": {
+        "path": "asset.e2659170a0721541efa761a8d5d04d5e36cbbf691c4b15a9053002b7c825055d.zip",
+        "packaging": "file"
+      },
+      "destinations": {
+        "current_account-Default region: us-east-2-ad957938": {
+          "bucketName": "cdk-hnb659fds-assets-${AWS::AccountId}-Default region: us-east-2",
+          "objectKey": "e2659170a0721541efa761a8d5d04d5e36cbbf691c4b15a9053002b7c825055d.zip",
+          "region": "Default region: us-east-2",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-file-publishing-role-${AWS::AccountId}-Default region: us-east-2"
+        }
+      }
+    },
+    "3423a042b818e31c1e34a19d6689ab2e5f9b70fcbe9e71df66f241b20a200bd9": {
+      "displayName": "Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C/Code",
+      "source": {
+        "path": "asset.3423a042b818e31c1e34a19d6689ab2e5f9b70fcbe9e71df66f241b20a200bd9",
+        "packaging": "zip"
+      },
+      "destinations": {
+        "current_account-Default region: us-east-2-ef8c226a": {
+          "bucketName": "cdk-hnb659fds-assets-${AWS::AccountId}-Default region: us-east-2",
+          "objectKey": "3423a042b818e31c1e34a19d6689ab2e5f9b70fcbe9e71df66f241b20a200bd9.zip",
+          "region": "Default region: us-east-2",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-file-publishing-role-${AWS::AccountId}-Default region: us-east-2"
+        }
+      }
+    },
+    "8f913c70da4bcba29f244ca0dde66b1fbf30536bed917cabc886f8acfc2c3a74": {
+      "displayName": "DeploySite/Asset1",
+      "source": {
+        "path": "asset.8f913c70da4bcba29f244ca0dde66b1fbf30536bed917cabc886f8acfc2c3a74",
+        "packaging": "zip"
+      },
+      "destinations": {
+        "current_account-Default region: us-east-2-98f7d95d": {
+          "bucketName": "cdk-hnb659fds-assets-${AWS::AccountId}-Default region: us-east-2",
+          "objectKey": "8f913c70da4bcba29f244ca0dde66b1fbf30536bed917cabc886f8acfc2c3a74.zip",
+          "region": "Default region: us-east-2",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-file-publishing-role-${AWS::AccountId}-Default region: us-east-2"
+        }
+      }
+    },
+    "7e27a27d16af46a39551cfd87f5645d88d973e9bda75d902193fb5b3f2b6959d": {
+      "displayName": "ShiftStormStack Template",
+      "source": {
+        "path": "ShiftStormStack.template.json",
+        "packaging": "file"
+      },
+      "destinations": {
+        "current_account-Default region: us-east-2-75d9ae5b": {
+          "bucketName": "cdk-hnb659fds-assets-${AWS::AccountId}-Default region: us-east-2",
+          "objectKey": "7e27a27d16af46a39551cfd87f5645d88d973e9bda75d902193fb5b3f2b6959d.json",
+          "region": "Default region: us-east-2",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-file-publishing-role-${AWS::AccountId}-Default region: us-east-2"
+        }
+      }
+    }
+  },
+  "dockerImages": {}
+}
