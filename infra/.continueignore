@@ -1,0 +1,10 @@
+node_modules/
+infra/node_modules/
+dist/
+build/
+.cdk.out/
+cdk.out/
+.git/
+*.log
+package-lock.json
+infra/site/index.html

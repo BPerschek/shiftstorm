@@ -4,7 +4,16 @@ const { DynamoDBDocumentClient, PutCommand, GetCommand, QueryCommand } = require
 const ddb = DynamoDBDocumentClient.from(new DynamoDBClient({}));
 
 const SUBMISSIONS_TABLE = process.env.SUBMISSIONS_TABLE;
-const SETTINGS_TABLE = process.env.SETTINGS_TABLE;
+const SETTINGS_TABLE    = process.env.SETTINGS_TABLE;
+
+/**
+ * Extract Cognito JWT claims that API Gateway injects into the request context.
+ * API Gateway validates the token before invoking Lambda, so this is always
+ * safe to trust on protected routes. Returns null on open routes (e.g. /submit).
+ */
+function extractClaims(event) {
+  return event.requestContext?.authorizer?.jwt?.claims || null;
+}
 
 function json(statusCode, body) {
   return {
@@ -28,15 +37,12 @@ async function readJson(event) {
 
 exports.handler = async (event) => {
   const method = (event.requestContext?.http?.method || "GET").toUpperCase();
-  const path = event.rawPath || "/";
+  const path   = event.rawPath || "/";
+  const claims  = extractClaims(event); // present on auth-protected routes
 
-  // Minimal endpoints:
-  // - POST /submit
-  // - GET/PUT /settings/emails?orgId=...
-  // - GET/PUT /leadership-notes?orgId=...&date=YYYY-MM-DD&shift=1st|2nd|3rd
-  //
-  // NOTE: Auth is intentionally not enforced yet (practice step: add JWT authorizer).
-  // Use "orgId" as a tenant key (default "default").
+  // NOTE: /submit is open (no JWT required). All other routes are protected by
+  // the Cognito JWT authorizer at API Gateway level — Lambda never sees
+  // unauthenticated calls for those paths.
 
   const qs = event.queryStringParameters || {};
   const orgId = (qs.orgId || "default").trim();

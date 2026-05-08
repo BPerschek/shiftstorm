@@ -8,6 +8,7 @@ import * as origins from 'aws-cdk-lib/aws-cloudfront-origins';
 import * as dynamodb from 'aws-cdk-lib/aws-dynamodb';
 import * as apigwv2 from 'aws-cdk-lib/aws-apigatewayv2';
 import * as apigwv2Integrations from 'aws-cdk-lib/aws-apigatewayv2-integrations';
+import * as apigwv2Auth from 'aws-cdk-lib/aws-apigatewayv2-authorizers';
 import * as lambda from 'aws-cdk-lib/aws-lambda';
 import * as cognito from 'aws-cdk-lib/aws-cognito';
 
@@ -52,6 +53,17 @@ export class ShiftStormStack extends cdk.Stack {
       }
     });
 
+    // ── Cognito JWT Authorizer ──────────────────────────────────────────
+    // Validates Bearer tokens issued by the Cognito User Pool.
+    // Protected routes require a valid token; /submit remains open.
+    const jwtAuthorizer = new apigwv2Auth.HttpJwtAuthorizer(
+      'CognitoAuthorizer',
+      `https://cognito-idp.${this.region}.amazonaws.com/${userPool.userPoolId}`,
+      {
+        jwtAudience: [userPoolClient.userPoolClientId],
+      }
+    );
+
     // HTTP API
     const httpApi = new apigwv2.HttpApi(this, 'HttpApi', {
       corsPreflight: {
@@ -80,13 +92,24 @@ export class ShiftStormStack extends cdk.Stack {
     submissions.grantReadWriteData(apiFn);
     settings.grantReadWriteData(apiFn);
 
+    const lambdaIntegration = new apigwv2Integrations.HttpLambdaIntegration(
+      'ProxyIntegration',
+      apiFn
+    );
+
+    // Open route — staff form submission, no auth required
+    httpApi.addRoutes({
+      path: '/submit',
+      methods: [apigwv2.HttpMethod.POST],
+      integration: lambdaIntegration,
+    });
+
+    // Protected routes — require valid Cognito JWT Bearer token
     httpApi.addRoutes({
       path: '/{proxy+}',
       methods: [apigwv2.HttpMethod.ANY],
-      integration: new apigwv2Integrations.HttpLambdaIntegration(
-          'ProxyIntegration',
-          apiFn
-      )
+      integration: lambdaIntegration,
+      authorizer: jwtAuthorizer,
     });
 
     // Static hosting
