@@ -25,3 +25,4 @@ cdk.out/
 # ── Environment / secrets ─────────────────────────────────────────────────────
 .env
 .env.*
+.claude/
