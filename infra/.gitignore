@@ -1,0 +1,12 @@
+# CDK generated output — never commit
+cdk.out/
+.cdk.staging/
+
+# TypeScript compiled output
+dist/
+
+# Dependencies
+node_modules/
+
+# Lock file (optional — remove this line if you want to commit it)
+package-lock.json
