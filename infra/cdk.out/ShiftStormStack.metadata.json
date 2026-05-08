@@ -14,6 +14,21 @@
       "data": true
     }
   ],
+  "/ShiftStormStack/AWSCloudFrontPartitionHostedZoneIdMap": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "AWSCloudFrontPartitionHostedZoneIdMap"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new ARecord2 in aws-cdk-lib...",
+        "new ShiftStormStack (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\lib\\shiftstorm-stack.js:185:9)",
+        "<anonymous> (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
   "/ShiftStormStack/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C": [
     {
       "type": "aws:cdk:is-custom-resource-handler-singleton",
@@ -32,7 +47,7 @@
     {
       "type": "aws:cdk:creationStack",
       "data": [
-        "new ShiftStormStack (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\lib\\shiftstorm-stack.js:136:9)",
+        "new ShiftStormStack (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\lib\\shiftstorm-stack.js:202:9)",
         "<anonymous> (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\bin\\app.js:40:1)",
         "...node internals..."
       ]
@@ -46,7 +61,7 @@
     {
       "type": "aws:cdk:creationStack",
       "data": [
-        "new ShiftStormStack (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\lib\\shiftstorm-stack.js:139:9)",
+        "new ShiftStormStack (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\lib\\shiftstorm-stack.js:205:9)",
         "<anonymous> (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\bin\\app.js:40:1)",
         "...node internals..."
       ]
@@ -60,7 +75,7 @@
     {
       "type": "aws:cdk:creationStack",
       "data": [
-        "new ShiftStormStack (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\lib\\shiftstorm-stack.js:142:9)",
+        "new ShiftStormStack (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\lib\\shiftstorm-stack.js:208:9)",
         "<anonymous> (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\bin\\app.js:40:1)",
         "...node internals..."
       ]
@@ -74,7 +89,7 @@
     {
       "type": "aws:cdk:creationStack",
       "data": [
-        "new ShiftStormStack (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\lib\\shiftstorm-stack.js:145:9)",
+        "new ShiftStormStack (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\lib\\shiftstorm-stack.js:211:9)",
         "<anonymous> (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\bin\\app.js:40:1)",
         "...node internals..."
       ]
@@ -115,7 +130,7 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...new Table2 in aws-cdk-lib...",
-        "new ShiftStormStack (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\lib\\shiftstorm-stack.js:57:29)",
+        "new ShiftStormStack (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\lib\\shiftstorm-stack.js:61:29)",
         "<anonymous> (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\bin\\app.js:40:1)",
         "...node internals..."
       ]
@@ -130,7 +145,7 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...new Table2 in aws-cdk-lib...",
-        "new ShiftStormStack (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\lib\\shiftstorm-stack.js:63:26)",
+        "new ShiftStormStack (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\lib\\shiftstorm-stack.js:67:26)",
         "<anonymous> (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\bin\\app.js:40:1)",
         "...node internals..."
       ]
@@ -145,7 +160,7 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...new UserPool2 in aws-cdk-lib...",
-        "new ShiftStormStack (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\lib\\shiftstorm-stack.js:69:26)",
+        "new ShiftStormStack (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\lib\\shiftstorm-stack.js:73:26)",
         "<anonymous> (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\bin\\app.js:40:1)",
         "...node internals..."
       ]
@@ -160,7 +175,7 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...new UserPoolClient2 in aws-cdk-lib...",
-        "new ShiftStormStack (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\lib\\shiftstorm-stack.js:74:32)",
+        "new ShiftStormStack (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\lib\\shiftstorm-stack.js:78:32)",
         "<anonymous> (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\bin\\app.js:40:1)",
         "...node internals..."
       ]
@@ -175,7 +190,7 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...new HttpApi2 in aws-cdk-lib...",
-        "new ShiftStormStack (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\lib\\shiftstorm-stack.js:83:25)",
+        "new ShiftStormStack (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\lib\\shiftstorm-stack.js:93:25)",
         "<anonymous> (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\bin\\app.js:40:1)",
         "...node internals..."
       ]
@@ -190,7 +205,7 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...new Function2 in aws-cdk-lib...",
-        "new ShiftStormStack (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\lib\\shiftstorm-stack.js:95:23)",
+        "new ShiftStormStack (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\lib\\shiftstorm-stack.js:105:23)",
         "<anonymous> (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\bin\\app.js:40:1)",
         "...node internals..."
       ]
@@ -205,7 +220,7 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...new Bucket2 in aws-cdk-lib...",
-        "new ShiftStormStack (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\lib\\shiftstorm-stack.js:113:28)",
+        "new ShiftStormStack (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\lib\\shiftstorm-stack.js:132:28)",
         "<anonymous> (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\bin\\app.js:40:1)",
         "...node internals..."
       ]
@@ -226,7 +241,7 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...new Bucket2 in aws-cdk-lib...",
-        "new ShiftStormStack (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\lib\\shiftstorm-stack.js:113:28)",
+        "new ShiftStormStack (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\lib\\shiftstorm-stack.js:132:28)",
         "<anonymous> (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\bin\\app.js:40:1)",
         "...node internals..."
       ]
@@ -241,7 +256,7 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...new Bucket2 in aws-cdk-lib...",
-        "new ShiftStormStack (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\lib\\shiftstorm-stack.js:113:28)",
+        "new ShiftStormStack (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\lib\\shiftstorm-stack.js:132:28)",
         "<anonymous> (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\bin\\app.js:40:1)",
         "...node internals..."
       ]
@@ -256,7 +271,22 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...new OriginAccessIdentity2 in aws-cdk-lib...",
-        "new ShiftStormStack (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\lib\\shiftstorm-stack.js:119:21)",
+        "new ShiftStormStack (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\lib\\shiftstorm-stack.js:138:21)",
+        "<anonymous> (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/ShiftStormStack/SecurityHeaders/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "SecurityHeadersE66B69D3"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new ResponseHeadersPolicy2 in aws-cdk-lib...",
+        "new ShiftStormStack (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\lib\\shiftstorm-stack.js:152:33)",
         "<anonymous> (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\bin\\app.js:40:1)",
         "...node internals..."
       ]
@@ -271,7 +301,37 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...new Distribution2 in aws-cdk-lib...",
-        "new ShiftStormStack (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\lib\\shiftstorm-stack.js:121:30)",
+        "new ShiftStormStack (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\lib\\shiftstorm-stack.js:170:30)",
+        "<anonymous> (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/ShiftStormStack/ApexAlias/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ApexAliasF68A3000"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new ARecord2 in aws-cdk-lib...",
+        "new ShiftStormStack (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\lib\\shiftstorm-stack.js:185:9)",
+        "<anonymous> (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/ShiftStormStack/WwwAlias/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "WwwAlias44931BEB"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new ARecord2 in aws-cdk-lib...",
+        "new ShiftStormStack (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\lib\\shiftstorm-stack.js:191:9)",
         "<anonymous> (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\bin\\app.js:40:1)",
         "...node internals..."
       ]
@@ -286,9 +346,22 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...new BucketDeployment2 in aws-cdk-lib...",
-        "new ShiftStormStack (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\lib\\shiftstorm-stack.js:130:9)",
+        "new ShiftStormStack (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\lib\\shiftstorm-stack.js:196:9)",
         "<anonymous> (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\bin\\app.js:40:1)",
         "...node internals..."
+      ]
+    }
+  ],
+  "/ShiftStormStack/CDKMetadata/Default": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CDKMetadata"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib, node internals...",
+        "(no user code in 9007199254740991 frames, use --stack-trace-limit to capture more)"
       ]
     }
   ],
@@ -301,7 +374,41 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...new HttpApi2 in aws-cdk-lib...",
-        "new ShiftStormStack (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\lib\\shiftstorm-stack.js:83:25)",
+        "new ShiftStormStack (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\lib\\shiftstorm-stack.js:93:25)",
+        "<anonymous> (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/ShiftStormStack/HttpApi/POST--submit/ProxyIntegration-Permission": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "HttpApiPOSTsubmitProxyIntegrationPermission58EC6E87"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\node_modules\\aws-cdk-lib\\aws-apigatewayv2\\lib\\http\\api.js:1:96 in aws-cdk-lib...",
+        "Array.map (:)",
+        "...WrappedClass.<anonymous> in aws-cdk-lib...",
+        "new ShiftStormStack (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\lib\\shiftstorm-stack.js:119:17)",
+        "<anonymous> (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/ShiftStormStack/HttpApi/POST--submit/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "HttpApiPOSTsubmit9AB9EAB2"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\node_modules\\aws-cdk-lib\\aws-apigatewayv2\\lib\\http\\api.js:1:96 in aws-cdk-lib...",
+        "Array.map (:)",
+        "...WrappedClass.<anonymous> in aws-cdk-lib...",
+        "new ShiftStormStack (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\lib\\shiftstorm-stack.js:119:17)",
         "<anonymous> (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\bin\\app.js:40:1)",
         "...node internals..."
       ]
@@ -318,7 +425,7 @@
         "...C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\node_modules\\aws-cdk-lib\\aws-apigatewayv2\\lib\\http\\api.js:1:96 in aws-cdk-lib...",
         "Array.map (:)",
         "...WrappedClass.<anonymous> in aws-cdk-lib...",
-        "new ShiftStormStack (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\lib\\shiftstorm-stack.js:107:17)",
+        "new ShiftStormStack (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\lib\\shiftstorm-stack.js:125:17)",
         "<anonymous> (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\bin\\app.js:40:1)",
         "...node internals..."
       ]
@@ -335,7 +442,24 @@
         "...C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\node_modules\\aws-cdk-lib\\aws-apigatewayv2\\lib\\http\\api.js:1:96 in aws-cdk-lib...",
         "Array.map (:)",
         "...WrappedClass.<anonymous> in aws-cdk-lib...",
-        "new ShiftStormStack (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\lib\\shiftstorm-stack.js:107:17)",
+        "new ShiftStormStack (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\lib\\shiftstorm-stack.js:125:17)",
+        "<anonymous> (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/ShiftStormStack/HttpApi/CognitoAuthorizer/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "HttpApiCognitoAuthorizer935FA0F6"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\node_modules\\aws-cdk-lib\\aws-apigatewayv2\\lib\\http\\api.js:1:96 in aws-cdk-lib...",
+        "Array.map (:)",
+        "...WrappedClass.<anonymous> in aws-cdk-lib...",
+        "new ShiftStormStack (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\lib\\shiftstorm-stack.js:125:17)",
         "<anonymous> (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\bin\\app.js:40:1)",
         "...node internals..."
       ]
@@ -350,7 +474,7 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...new Function2 in aws-cdk-lib...",
-        "new ShiftStormStack (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\lib\\shiftstorm-stack.js:95:23)",
+        "new ShiftStormStack (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\lib\\shiftstorm-stack.js:105:23)",
         "<anonymous> (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\bin\\app.js:40:1)",
         "...node internals..."
       ]
@@ -365,7 +489,7 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...new Bucket2 in aws-cdk-lib...",
-        "new ShiftStormStack (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\lib\\shiftstorm-stack.js:113:28)",
+        "new ShiftStormStack (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\lib\\shiftstorm-stack.js:132:28)",
         "<anonymous> (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\bin\\app.js:40:1)",
         "...node internals..."
       ]
@@ -386,7 +510,7 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...new Bucket2 in aws-cdk-lib...",
-        "new ShiftStormStack (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\lib\\shiftstorm-stack.js:113:28)",
+        "new ShiftStormStack (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\lib\\shiftstorm-stack.js:132:28)",
         "<anonymous> (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\bin\\app.js:40:1)",
         "...node internals..."
       ]
@@ -401,7 +525,7 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...new BucketDeployment2 in aws-cdk-lib...",
-        "new ShiftStormStack (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\lib\\shiftstorm-stack.js:130:9)",
+        "new ShiftStormStack (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\lib\\shiftstorm-stack.js:196:9)",
         "<anonymous> (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\bin\\app.js:40:1)",
         "...node internals..."
       ]
@@ -416,7 +540,7 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...new BucketDeployment2 in aws-cdk-lib...",
-        "new ShiftStormStack (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\lib\\shiftstorm-stack.js:130:9)",
+        "new ShiftStormStack (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\lib\\shiftstorm-stack.js:196:9)",
         "<anonymous> (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\bin\\app.js:40:1)",
         "...node internals..."
       ]
@@ -431,16 +555,16 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...new BucketDeployment2 in aws-cdk-lib...",
-        "new ShiftStormStack (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\lib\\shiftstorm-stack.js:130:9)",
+        "new ShiftStormStack (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\lib\\shiftstorm-stack.js:196:9)",
         "<anonymous> (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\bin\\app.js:40:1)",
         "...node internals..."
       ]
     }
   ],
-  "/ShiftStormStack/HttpApi/ANY--{proxy+}/ProxyIntegration/Resource": [
+  "/ShiftStormStack/HttpApi/POST--submit/ProxyIntegration/Resource": [
     {
       "type": "aws:cdk:logicalId",
-      "data": "HttpApiANYproxyProxyIntegration81A544D4"
+      "data": "HttpApiPOSTsubmitProxyIntegration52042D51"
     },
     {
       "type": "aws:cdk:creationStack",
@@ -448,7 +572,7 @@
         "...C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\node_modules\\aws-cdk-lib\\aws-apigatewayv2\\lib\\http\\api.js:1:96 in aws-cdk-lib...",
         "Array.map (:)",
         "...WrappedClass.<anonymous> in aws-cdk-lib...",
-        "new ShiftStormStack (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\lib\\shiftstorm-stack.js:107:17)",
+        "new ShiftStormStack (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\lib\\shiftstorm-stack.js:119:17)",
         "<anonymous> (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\bin\\app.js:40:1)",
         "...node internals..."
       ]
@@ -463,7 +587,7 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "...WrappedClass.grantReadWriteData in aws-cdk-lib...",
-        "new ShiftStormStack (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\lib\\shiftstorm-stack.js:105:21)",
+        "new ShiftStormStack (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\lib\\shiftstorm-stack.js:115:21)",
         "<anonymous> (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\bin\\app.js:40:1)",
         "...node internals..."
       ]
@@ -480,7 +604,7 @@
         "...C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\node_modules\\aws-cdk-lib\\aws-s3-deployment\\lib\\bucket-deployment.js:1:71 in aws-cdk-lib...",
         "Array.map (:)",
         "...new BucketDeployment2 in aws-cdk-lib...",
-        "new ShiftStormStack (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\lib\\shiftstorm-stack.js:130:9)",
+        "new ShiftStormStack (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\lib\\shiftstorm-stack.js:196:9)",
         "<anonymous> (C:\\Users\\persc\\Desktop\\shiftstorm.me\\infra\\dist\\bin\\app.js:40:1)",
         "...node internals..."
       ]

@@ -11,21 +11,21 @@
     },
     "ShiftStormStack": {
       "type": "aws:cloudformation:stack",
-      "environment": "aws://unknown-account/Default region: us-east-2",
+      "environment": "aws://824140446439/us-east-2",
       "properties": {
         "templateFile": "ShiftStormStack.template.json",
         "terminationProtection": false,
         "validateOnSynth": false,
-        "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-Default region: us-east-2",
-        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-Default region: us-east-2",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-Default region: us-east-2/7e27a27d16af46a39551cfd87f5645d88d973e9bda75d902193fb5b3f2b6959d.json",
+        "assumeRoleArn": "arn:${AWS::Partition}:iam::824140446439:role/cdk-hnb659fds-deploy-role-824140446439-us-east-2",
+        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::824140446439:role/cdk-hnb659fds-cfn-exec-role-824140446439-us-east-2",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-824140446439-us-east-2/164c528525748701081302194dd7e54102576b45f00ebf3b000056525f12dd86.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
           "ShiftStormStack.assets"
         ],
         "lookupRole": {
-          "arn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-lookup-role-${AWS::AccountId}-Default region: us-east-2",
+          "arn": "arn:${AWS::Partition}:iam::824140446439:role/cdk-hnb659fds-lookup-role-824140446439-us-east-2",
           "requiresBootstrapStackVersion": 8,
           "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
         }

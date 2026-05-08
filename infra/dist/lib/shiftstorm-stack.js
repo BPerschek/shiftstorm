@@ -43,8 +43,12 @@ const origins = __importStar(require("aws-cdk-lib/aws-cloudfront-origins"));
 const dynamodb = __importStar(require("aws-cdk-lib/aws-dynamodb"));
 const apigwv2 = __importStar(require("aws-cdk-lib/aws-apigatewayv2"));
 const apigwv2Integrations = __importStar(require("aws-cdk-lib/aws-apigatewayv2-integrations"));
+const apigwv2Auth = __importStar(require("aws-cdk-lib/aws-apigatewayv2-authorizers"));
 const lambda = __importStar(require("aws-cdk-lib/aws-lambda"));
 const cognito = __importStar(require("aws-cdk-lib/aws-cognito"));
+const acm = __importStar(require("aws-cdk-lib/aws-certificatemanager"));
+const route53 = __importStar(require("aws-cdk-lib/aws-route53"));
+const route53targets = __importStar(require("aws-cdk-lib/aws-route53-targets"));
 class ShiftStormStack extends cdk.Stack {
     constructor(scope, id, props) {
         super(scope, id, props);
@@ -79,6 +83,12 @@ class ShiftStormStack extends cdk.Stack {
                 userSrp: true
             }
         });
+        // ── Cognito JWT Authorizer ──────────────────────────────────────────
+        // Validates Bearer tokens issued by the Cognito User Pool.
+        // Protected routes require a valid token; /submit remains open.
+        const jwtAuthorizer = new apigwv2Auth.HttpJwtAuthorizer('CognitoAuthorizer', `https://cognito-idp.${this.region}.amazonaws.com/${userPool.userPoolId}`, {
+            jwtAudience: [userPoolClient.userPoolClientId],
+        });
         // HTTP API
         const httpApi = new apigwv2.HttpApi(this, 'HttpApi', {
             corsPreflight: {
@@ -104,10 +114,19 @@ class ShiftStormStack extends cdk.Stack {
         });
         submissions.grantReadWriteData(apiFn);
         settings.grantReadWriteData(apiFn);
+        const lambdaIntegration = new apigwv2Integrations.HttpLambdaIntegration('ProxyIntegration', apiFn);
+        // Open route — staff form submission, no auth required
+        httpApi.addRoutes({
+            path: '/submit',
+            methods: [apigwv2.HttpMethod.POST],
+            integration: lambdaIntegration,
+        });
+        // Protected routes — require valid Cognito JWT Bearer token
         httpApi.addRoutes({
             path: '/{proxy+}',
             methods: [apigwv2.HttpMethod.ANY],
-            integration: new apigwv2Integrations.HttpLambdaIntegration('ProxyIntegration', apiFn)
+            integration: lambdaIntegration,
+            authorizer: jwtAuthorizer,
         });
         // Static hosting
         const siteBucket = new s3.Bucket(this, 'SiteBucket', {
@@ -118,14 +137,61 @@ class ShiftStormStack extends cdk.Stack {
         });
         const oai = new cloudfront.OriginAccessIdentity(this, 'OAI');
         siteBucket.grantRead(oai);
+        // ── Custom domain certificate (us-east-1, already issued) ────────────
+        // ARN is stable — cert covers shiftstorm.me + www.shiftstorm.me.
+        // We reference it by ARN so CDK never tries to create or destroy it.
+        const siteCert = acm.Certificate.fromCertificateArn(this, 'SiteCert', 'arn:aws:acm:us-east-1:824140446439:certificate/367b8484-c8a7-407e-9d1c-0bd58afb3c93');
+        // ── Route53 hosted zone (already exists, reference only) ─────────────
+        const hostedZone = route53.HostedZone.fromHostedZoneAttributes(this, 'ShiftstormZone', {
+            hostedZoneId: 'Z07036261ZES0YCTD1E65',
+            zoneName: 'shiftstorm.me',
+        });
+        // ── Security response headers ──────────────────────────────────────────
+        // Sends HSTS, X-Content-Type-Options, X-Frame-Options, and
+        // Referrer-Policy on every CloudFront response.
+        const securityHeaders = new cloudfront.ResponseHeadersPolicy(this, 'SecurityHeaders', {
+            securityHeadersBehavior: {
+                strictTransportSecurity: {
+                    accessControlMaxAge: cdk.Duration.days(365),
+                    includeSubdomains: true,
+                    override: true,
+                },
+                contentTypeOptions: { override: true },
+                frameOptions: {
+                    frameOption: cloudfront.HeadersFrameOption.DENY,
+                    override: true,
+                },
+                referrerPolicy: {
+                    referrerPolicy: cloudfront.HeadersReferrerPolicy.STRICT_ORIGIN_WHEN_CROSS_ORIGIN,
+                    override: true,
+                },
+            },
+        });
         const distribution = new cloudfront.Distribution(this, 'Distribution', {
             defaultBehavior: {
                 origin: new origins.S3Origin(siteBucket, {
                     originAccessIdentity: oai
                 }),
-                viewerProtocolPolicy: cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS
+                viewerProtocolPolicy: cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
+                responseHeadersPolicy: securityHeaders,
             },
-            defaultRootObject: 'index.html'
+            defaultRootObject: 'index.html',
+            // ── Custom domain wiring ─────────────────────────────────────────
+            domainNames: ['shiftstorm.me', 'www.shiftstorm.me'],
+            certificate: siteCert,
+        });
+        // ── Route53 DNS records ───────────────────────────────────────────────
+        // Apex A alias → CloudFront (replaces GitHub Pages 185.199.x.x records)
+        new route53.ARecord(this, 'ApexAlias', {
+            zone: hostedZone,
+            recordName: 'shiftstorm.me',
+            target: route53.RecordTarget.fromAlias(new route53targets.CloudFrontTarget(distribution)),
+        });
+        // www CNAME alias → CloudFront (replaces bperschek.github.io)
+        new route53.ARecord(this, 'WwwAlias', {
+            zone: hostedZone,
+            recordName: 'www',
+            target: route53.RecordTarget.fromAlias(new route53targets.CloudFrontTarget(distribution)),
         });
         new s3deploy.BucketDeployment(this, 'DeploySite', {
             sources: [s3deploy.Source.asset(sitePath)],

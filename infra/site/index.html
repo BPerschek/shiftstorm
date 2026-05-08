@@ -4,7 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>ShiftStorm – Foundation2</title>
-  <link rel="manifest" href="/manifest.json">
+  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  <link rel="manifest" href="data:application/json,%7B%22name%22%3A%22ShiftStorm%22%2C%22short_name%22%3A%22ShiftStorm%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%230f2645%22%2C%22theme_color%22%3A%22%230f2645%22%7D">
   <meta name="theme-color" content="#0f2645">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -1156,9 +1157,9 @@
 // To redeploy site after editing this file:
 //   npx cdk deploy   (re-deploys S3 + invalidates CloudFront)
 // ──────────────────────────────────────────────────────────────────────────────
-const API_BASE_URL        = ''; // e.g. 'https://abc123.execute-api.us-east-1.amazonaws.com'
-const USER_POOL_ID        = ''; // e.g. 'us-east-1_XXXXXXXXX'
-const USER_POOL_CLIENT_ID = ''; // e.g. 'xxxxxxxxxxxxxxxxxxxx'
+const API_BASE_URL        = 'https://95lss2x15e.execute-api.us-east-2.amazonaws.com';
+const USER_POOL_ID        = 'us-east-2_y8XFCxuAA';
+const USER_POOL_CLIENT_ID = '1vmv32uv1e58laq518ngbnkb8b';
 const ORG_ID              = 'default';
 
 // Runtime auth state — populated after Cognito sign-in

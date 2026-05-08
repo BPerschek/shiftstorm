@@ -11,6 +11,9 @@ import * as apigwv2Integrations from 'aws-cdk-lib/aws-apigatewayv2-integrations'
 import * as apigwv2Auth from 'aws-cdk-lib/aws-apigatewayv2-authorizers';
 import * as lambda from 'aws-cdk-lib/aws-lambda';
 import * as cognito from 'aws-cdk-lib/aws-cognito';
+import * as acm from 'aws-cdk-lib/aws-certificatemanager';
+import * as route53 from 'aws-cdk-lib/aws-route53';
+import * as route53targets from 'aws-cdk-lib/aws-route53-targets';
 
 export class ShiftStormStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
@@ -124,15 +127,78 @@ export class ShiftStormStack extends cdk.Stack {
 
     siteBucket.grantRead(oai);
 
+    // ── Custom domain certificate (us-east-1, already issued) ────────────
+    // ARN is stable — cert covers shiftstorm.me + www.shiftstorm.me.
+    // We reference it by ARN so CDK never tries to create or destroy it.
+    const siteCert = acm.Certificate.fromCertificateArn(
+      this,
+      'SiteCert',
+      'arn:aws:acm:us-east-1:824140446439:certificate/367b8484-c8a7-407e-9d1c-0bd58afb3c93'
+    );
+
+    // ── Route53 hosted zone (already exists, reference only) ─────────────
+    const hostedZone = route53.HostedZone.fromHostedZoneAttributes(
+      this,
+      'ShiftstormZone',
+      {
+        hostedZoneId: 'Z07036261ZES0YCTD1E65',
+        zoneName:     'shiftstorm.me',
+      }
+    );
+
+    // ── Security response headers ──────────────────────────────────────────
+    // Sends HSTS, X-Content-Type-Options, X-Frame-Options, and
+    // Referrer-Policy on every CloudFront response.
+    const securityHeaders = new cloudfront.ResponseHeadersPolicy(this, 'SecurityHeaders', {
+      securityHeadersBehavior: {
+        strictTransportSecurity: {
+          accessControlMaxAge: cdk.Duration.days(365),
+          includeSubdomains: true,
+          override: true,
+        },
+        contentTypeOptions: { override: true },
+        frameOptions: {
+          frameOption: cloudfront.HeadersFrameOption.DENY,
+          override: true,
+        },
+        referrerPolicy: {
+          referrerPolicy: cloudfront.HeadersReferrerPolicy.STRICT_ORIGIN_WHEN_CROSS_ORIGIN,
+          override: true,
+        },
+      },
+    });
+
     const distribution = new cloudfront.Distribution(this, 'Distribution', {
       defaultBehavior: {
         origin: new origins.S3Origin(siteBucket, {
           originAccessIdentity: oai
         }),
-        viewerProtocolPolicy:
-        cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS
+        viewerProtocolPolicy:  cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
+        responseHeadersPolicy: securityHeaders,
       },
-      defaultRootObject: 'index.html'
+      defaultRootObject: 'index.html',
+      // ── Custom domain wiring ─────────────────────────────────────────
+      domainNames:  ['shiftstorm.me', 'www.shiftstorm.me'],
+      certificate:  siteCert,
+    });
+
+    // ── Route53 DNS records ───────────────────────────────────────────────
+    // Apex A alias → CloudFront (replaces GitHub Pages 185.199.x.x records)
+    new route53.ARecord(this, 'ApexAlias', {
+      zone:       hostedZone,
+      recordName: 'shiftstorm.me',
+      target:     route53.RecordTarget.fromAlias(
+        new route53targets.CloudFrontTarget(distribution)
+      ),
+    });
+
+    // www CNAME alias → CloudFront (replaces bperschek.github.io)
+    new route53.ARecord(this, 'WwwAlias', {
+      zone:       hostedZone,
+      recordName: 'www',
+      target:     route53.RecordTarget.fromAlias(
+        new route53targets.CloudFrontTarget(distribution)
+      ),
     });
 
     new s3deploy.BucketDeployment(this, 'DeploySite', {
